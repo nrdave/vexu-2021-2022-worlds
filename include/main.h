@@ -42,6 +42,9 @@
 #include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
 
+// Access to okapiLib literals
+using namespace okapi::literals;
+
 // User Files
 #include "externs.hpp"
 
