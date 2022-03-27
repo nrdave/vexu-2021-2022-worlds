@@ -7,6 +7,10 @@ okapi::Controller controller;
 // lift, as an extern class, must be initialized in the global scope
 Lift lift({20, 10}, {false, true});
 
+// Declaring all LVGL objects
+lv_obj_t * pageMain;
+lv_obj_t * backgroundIMG;
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -15,6 +19,7 @@ Lift lift({20, 10}, {false, true});
  */
 void initialize() {
 
+    // Initializing subsystems
     drive = okapi::ChassisControllerBuilder()
         .withMotors(
             {11, 12},
@@ -26,6 +31,16 @@ void initialize() {
     lift.setExternalGearRatio(12.0 / 60.0);
     lift.setGearing(MOTOR_GEARSET_06);
     lift.setMaxSpeeds(75, 60);
+
+    // Initialize GUI
+    LV_IMG_DECLARE(background)
+
+    pageMain = lv_page_create(lv_scr_act(), NULL);
+    lv_obj_align(pageMain, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+    lv_obj_set_size(pageMain, 480, 480);
+
+    backgroundIMG = lv_img_create(pageMain, NULL);
+    lv_img_set_src(backgroundIMG, &background);
 }
 
 /**
