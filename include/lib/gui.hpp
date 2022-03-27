@@ -6,10 +6,8 @@
  * than a class due to the nature of the LittleVGL C graphics library. I've
  * tried using classes, but they run into too many issues with LVGL functions
  * 
- * The GUI namespace contains the fnctions used to create and
- * set up a GUI menu. I used a namespace so that rather than creating everything
- * in initialize.cpp, I can put most of the code here and simply run the necessary
- * functions from initialize.cpp, making everything a lot cleaner
+ * The GUI namespace contains functions that perform all of the necessary tasks for 
+ * creating a LVGL object.
  */ 
 
 namespace GUI {
@@ -27,7 +25,9 @@ namespace GUI {
      * @param xCoord: the x coordinate offset from the given alignment
      * @param yCoord: the y coordinate offset from the given alignment
      * @param width: the width of the button 
-     * @param height: the height of the button     
+     * @param height: the height of the button  
+     * 
+     * @return A pointer to a new LVGL button created using the given specs   
      */ 
     lv_obj_t * createButton(lv_obj_t * parent, lv_btn_action_t pressType, lv_action_t function,
                             const char* text, lv_align_t align, lv_coord_t xCoord, 
@@ -43,6 +43,8 @@ namespace GUI {
      * @param align: the LVGL alignment type, aligns relative to the parent object
      * @param xCoord: the x coordinate offset from the given alignment
      * @param yCoord: the y coordinate offset from the given alignment
+     * 
+     * @return A pointer to a new LVGL label created using the given specs   
      */ 
     lv_obj_t * createLabel(lv_obj_t * parent, const char* text, lv_align_t align, lv_coord_t xCoord, lv_coord_t yCoord);
 
@@ -59,57 +61,11 @@ namespace GUI {
      * @param yCoord: the y coordinate offset from the given alignment
      * @param width: the width of the button matrix
      * @param height: the height of the button matrix
+     * 
+     * @return A pointer to a new LVGL button matrix created using the given specs        
      */ 
     lv_obj_t * createButtonMatrix(lv_obj_t * parent, const char* map[], lv_btnm_action_t function,
                                   lv_align_t align, lv_coord_t xCoord, lv_coord_t yCoord,
                                   lv_coord_t width, lv_coord_t height);
 
-
-    /**
-     * A function to create an LVGL screen. It simply wraps the LVGL lv_obj_create(NULL, NULL)
-     * function call, used to create a screen, in a nicer format
-     */ 
-    lv_obj_t * createScreen();
-
-    /**
-     * The callback function for the auton selection button matrix
-     * Although the function is never explicitly called, the parameters
-     * exist to allow LVGL to pass in the needed values from the button
-     * matrix
-     */ 
-    lv_res_t updateAutonID(lv_obj_t * btnm, const char * txt);
-
-    //The function to update label displaying the selected autonomous routine
-    void updateAutonLbl();
-
-    /**
-     * The callback function for the debugData button matrix, displays the
-     * selected telemetry data using updateTelemetryLabel
-     */ 
-    lv_res_t updateTelemetryData(lv_obj_t * btnm, const char* txt);
-
-    /**
-     * A function used to update any telemetry label.
-     * @param label: a pointer to the LVGL label to write the telemetry data to
-     * @param t: the telemetry data to write
-     */ 
-    void updateTelemetryLabel(lv_obj_t * label, Telemetry t);
-
-    /**
-     * A function that wraps all updateTelemetryLabel() calls
-     * into one function
-     */ 
-    void updateTelemetry();
-
-    /**
-     * A function used to call autonomous() when the runAuton button is pressed
-     * LVGL requires callback functions to return type lv_res_t, so I had
-     * to wrap autonomous() in this function
-     */ 
-    lv_res_t runAuton(lv_obj_t * btn);
-
-    //Functions to navigate to specific LVGL Screens. Used in the navigation buttons
-    lv_res_t goToMain(lv_obj_t * btn);
-    lv_res_t goToAuton(lv_obj_t * btn);
-    lv_res_t goToDebug(lv_obj_t * btn);
 }
