@@ -5,7 +5,7 @@ std::shared_ptr<okapi::ChassisController> drive;
 okapi::Controller controller;
 
 // lift, as an extern class, must be initialized in the global scope
-Lift lift({20, 10}, {false, true}, DIGITAL_R1, DIGITAL_R2, pros::E_MOTOR_ENCODER_DEGREES, pros::E_MOTOR_GEARSET_06, 75, 60);
+Lift lift({20, 10}, {false, true});
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -20,8 +20,12 @@ void initialize() {
             {11, 12},
             {-3, -4}
         )
+        .withDimensions(okapi::AbstractMotor::gearset::green, {{3.25_in, 11_in}, okapi::quadEncoderTPR})
         .build();
 
+    lift.setExternalGearRatio(12.0 / 60.0);
+    lift.setGearing(MOTOR_GEARSET_06);
+    lift.setMaxSpeeds(75, 60);
 }
 
 /**
