@@ -55,4 +55,4 @@ namespace GUI {
 
 }
 
-#endif GUI_HPP
+#endif // gui.hpp
