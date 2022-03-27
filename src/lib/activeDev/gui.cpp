@@ -1,4 +1,4 @@
-#include "main.h"
+#include "lib/gui.hpp"
 
 /**
  * The implementations for the GUI namespace functions, along with the
@@ -15,7 +15,8 @@ lv_obj_t * GUI::createButton(lv_obj_t * parent, lv_btn_action_t pressType,
     lv_btn_set_action(btn, pressType, function);   
 
     //Creating a label for the button
-    lv_obj_t * label = createLabel(btn, text, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_t * label = createLabel(btn, text);
+    lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
     /**
      * Return the created button
      * This returns the button to the declared LVGL object in
