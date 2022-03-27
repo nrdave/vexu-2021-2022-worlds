@@ -1,6 +1,8 @@
-#pragma once
+#ifndef GUI_HPP
+#define GUI_HPP
+
 #include "pros/apix.h"
-#include "stdio.h"
+
 /**
  * The header file for the GUI namespace. The GUI uses a namespace rather
  * than a class due to the nature of the LittleVGL C graphics library. I've
@@ -52,3 +54,5 @@ namespace GUI {
     lv_obj_t * createButtonMatrix(lv_obj_t * parent, const char* map[], lv_btnm_action_t function);
 
 }
+
+#endif GUI_HPP
