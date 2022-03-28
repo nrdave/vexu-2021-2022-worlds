@@ -15,6 +15,13 @@ class Claw {
     MotorGroup motors;
 
     /**
+     * The maximum speed (in RPM) that the motors can travel at. 100 is the
+     * default as that is both a) a reasonable speed, and b) is the fastest
+     * motors with red gear cartridges can go.
+     */
+    int maxSpd = 100;
+
+    /**
      * A variable holding the amount of degrees for the claw to rotate
      * to open/close. Used in digital claw control, which is when a single
      * button is pressed once to open/close the claw. In contrast, analog
@@ -83,6 +90,29 @@ class Claw {
     void driver(pros::controller_id_e_t controller,
                 pros::controller_digital_e_t openButton,
                 pros::controller_digital_e_t closeButton);
+
+    /**
+     * Function: driver
+     * This implementation of the driver function builds on the previous one
+     * by adding digital claw control, which is when a single button is pressed
+     * once to open/close the claw. In contrast, analog claw control involves
+     * having to hold a button to keep the claw moving
+     *
+     * @param controller The controller ID representing the physical controller
+     * @param openButton The button on the controller used to open the claw
+     * manually (must be held down)
+     * @param closeButton The button on the controller used to close the claw
+     * manually (must be held down)
+     * @param digitalOpenButton The button on the controller used to open the
+     * claw digitally (single press)
+     * @param digitalCloseButton The button on the controller used to close the
+     * claw digitally (single press)
+     */
+    void driver(pros::controller_id_e_t controller,
+                pros::controller_digital_e_t openButton,
+                pros::controller_digital_e_t closeButton,
+                pros::controller_digital_e_t digitalOpenButton,
+                pros::controller_digital_e_t digitalCloseButton);
 
     /**
      * Function: open()
