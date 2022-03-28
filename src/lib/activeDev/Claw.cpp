@@ -58,7 +58,7 @@ void Claw::close() {
     motors.moveVelocity(maxSpd);
 }
 
-void Claw::openTo(double degrees = digitalRotation) {
+void Claw::openTo(double degrees) {
     // If the claw is opening, holding position is not important. So, it's
     // better to not have the motors hold position
     motors.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
@@ -67,9 +67,13 @@ void Claw::openTo(double degrees = digitalRotation) {
     motors.moveRelative(-degrees, maxSpd);
 }
 
-void Claw::closeTo(double degrees = digitalRotation) {
+void Claw::closeTo(double degrees) {
     // If the claw is closing, holding position is important in order to ensure
     // that the object being held is not let go of.
     motors.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
     motors.moveRelative(degrees, maxSpd);
 }
+
+// Overloaded openTo and closeTo functions that use digitalRotation
+void Claw::openTo() { openTo(digitalRotation); }
+void Claw::closeTo() { closeTo(digitalRotation); }
