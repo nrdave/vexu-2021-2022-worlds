@@ -8,8 +8,8 @@ okapi::Controller controller;
 Lift lift({20, 10}, {false, true});
 
 // Declaring all LVGL objects
-lv_obj_t * pageMain;
-lv_obj_t * backgroundIMG;
+lv_obj_t* pageMain;
+lv_obj_t* backgroundIMG;
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -18,15 +18,12 @@ lv_obj_t * backgroundIMG;
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-
     // Initializing subsystems
     drive = okapi::ChassisControllerBuilder()
-        .withMotors(
-            {11, 12},
-            {-3, -4}
-        )
-        .withDimensions(okapi::AbstractMotor::gearset::green, {{3.25_in, 11_in}, okapi::quadEncoderTPR})
-        .build();
+                .withMotors({11, 12}, {-3, -4})
+                .withDimensions(okapi::AbstractMotor::gearset::green,
+                                {{3.25_in, 11_in}, okapi::quadEncoderTPR})
+                .build();
 
     lift.setExternalGearRatio(12.0 / 60.0);
     lift.setGearing(MOTOR_GEARSET_06);

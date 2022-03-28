@@ -14,9 +14,10 @@
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-    while(true) {
-        drive->getModel()->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
-                                  controller.getAnalog(okapi::ControllerAnalog::leftX));
+    while (true) {
+        drive->getModel()->tank(
+            controller.getAnalog(okapi::ControllerAnalog::leftY),
+            controller.getAnalog(okapi::ControllerAnalog::leftX));
         lift.driver(CONTROLLER_MASTER, DIGITAL_R1, DIGITAL_R2);
     }
 }
