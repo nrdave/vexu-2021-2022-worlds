@@ -138,7 +138,7 @@ class Claw {
      * @param hold indicates whether the motors should hold the claw's position,
      * or let it spin
      */
-    void openTo(double degrees = digitalRotation, bool hold);
+    void openTo(double degrees = digitalRotation);
 
     /**
      * Function: closeTo
@@ -150,7 +150,7 @@ class Claw {
      * @param hold indicates whether the motors should hold the claw's position,
      * or let it spin
      */
-    void closeTo(double degrees = digitalRotation, bool hold);
+    void closeTo(double degrees = digitalRotation);
 };
 
 #endif  // Claw.hpp
