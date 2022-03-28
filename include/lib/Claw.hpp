@@ -88,8 +88,8 @@ class Claw {
      * @param closeButton The button on the controller used to close the claw
      */
     void driver(pros::controller_id_e_t controller,
-                pros::controller_digital_e_t openButton,
-                pros::controller_digital_e_t closeButton);
+                pros::controller_digital_e_t closeButton,
+                pros::controller_digital_e_t openButton);
 
     /**
      * Function: driver
@@ -109,10 +109,10 @@ class Claw {
      * claw digitally (single press)
      */
     void driver(pros::controller_id_e_t controller,
-                pros::controller_digital_e_t openButton,
                 pros::controller_digital_e_t closeButton,
-                pros::controller_digital_e_t digitalOpenButton,
-                pros::controller_digital_e_t digitalCloseButton);
+                pros::controller_digital_e_t openButton,
+                pros::controller_digital_e_t digitalCloseButton,
+                pros::controller_digital_e_t digitalOpenButton);
 
     /**
      * Function: open()

@@ -17,25 +17,27 @@ void Claw::setMaxSpeed(int maxRPM) { maxSpd = maxRPM; }
 void Claw::setDigitalRotation(double degrees) { digitalRotation = degrees; }
 
 void Claw::driver(pros::controller_id_e_t controller,
-                  pros::controller_digital_e_t openButton,
-                  pros::controller_digital_e_t closeButton) {
-    if (pros::c::controller_get_digital(controller, openButton))
-        open();
-    else if (pros::c::controller_get_digital(controller, closeButton))
+                  pros::controller_digital_e_t closeButton,
+                  pros::controller_digital_e_t openButton) {
+    if (pros::c::controller_get_digital(controller, closeButton))
         close();
+    else if (pros::c::controller_get_digital(controller, openButton))
+        open();
+
     else
         motors.moveVelocity(0);
 }
 
 void Claw::driver(pros::controller_id_e_t controller,
-                  pros::controller_digital_e_t openButton,
                   pros::controller_digital_e_t closeButton,
-                  pros::controller_digital_e_t digitalOpenButton,
-                  pros::controller_digital_e_t digitalCloseButton) {
-    if (pros::c::controller_get_digital(controller, digitalOpenButton))
-        openTo(false);
-    else if (pros::c::controller_get_digital(controller, digitalCloseButton))
+                  pros::controller_digital_e_t openButton,
+                  pros::controller_digital_e_t digitalCloseButton,
+                  pros::controller_digital_e_t digitalOpenButton) {
+    if (pros::c::controller_get_digital(controller, digitalCloseButton))
         closeTo(true);
+    else if (pros::c::controller_get_digital(controller, digitalOpenButton))
+        openTo(false);
+
     else
         // If neither digital button is pressed, call the simpler driver
         // function for analog control
