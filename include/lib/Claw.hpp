@@ -121,6 +121,6 @@ class Claw {
      * or let it spin
      */
     void closeTo(double degrees = digitalRotation, bool hold);
-}
+};
 
 #endif  // Claw.hpp
