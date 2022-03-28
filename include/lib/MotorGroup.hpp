@@ -109,7 +109,9 @@ class MotorGroup {
         /**
          * Function getPosition
          * This function returns the average current position of every motor
-         * in the group. 
+         * in the group, using the internal motor encoders
+         * 
+         * @returns The average position of the
          */ 
             double getPosition();
 };
