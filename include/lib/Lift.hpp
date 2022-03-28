@@ -5,12 +5,13 @@
 
 /**
  * The Lift class is used to abstract any sort of lift. It provides a simple interface to
- * control an okapiLib MotorGroup.
+ * control a MotorGroup.
  * 
+ * Generally, the naming conventions map best to a n-bar style lift.
  */ 
 class Lift {
     private:
-    // The okapiLib motor group that represents the motors on the lift
+    // The MotorGroup that represents the motors on the lift
         MotorGroup motors;
     /**
      * The maximum speeds (in RPM) that the motors can travel at. 100 is the default
@@ -49,7 +50,8 @@ class Lift {
      * Configuration functions
      *-------------------------*/              
     /**
-     * A function to change the internal gearing on the motors.
+     * Function: setGearing
+     * This function configures the internal gearing on the motors.
      * If this is not called, the MotorGroup will assume a default
      * value of green motor cartrigdes (max 200 RPM)
      * 
@@ -58,7 +60,8 @@ class Lift {
         void setGearing(pros::motor_gearset_e_t gearing);
 
     /**
-     * A function to define the external gear ratio on the lift.
+     * Function: setExternalGearRatio
+     * This function defines the external gear ratio on the lift.
      * Most lifts are not powered directly from a motor, instead
      * being driven off of some sort of torque gear ratio, such as
      * a 1:5 ratio, with a 12 tooth gear driving a 60 tooth gear.
@@ -73,7 +76,8 @@ class Lift {
         void setExternalGearRatio(double ratio);
 
     /**
-     * A function to change the maximum speeds, in RPM, of the lift motors.
+     * Function: setMaxSpeeds
+     * This function changes the maximum speeds, in RPM, of the lift motors.
      * There are separate up and down speeds as, generally,
      * having a lift go down slower is a good idea, as it prevents
      * a rough impact on wherever the end of the lift rests.
@@ -84,20 +88,23 @@ class Lift {
         void setMaxSpeeds(int maxUpRPM, int maxDownRPM);
 
     /**
-     * A function to change the threshold at which the motors
-     * hold position
+     * Function: setHoldThreshold
+     * This function changes the threshold at which the motors on the lift
+     * will start holding their position, rather than allowing free movement.
+     * 
+     * @param degrees The rotation from the 0 position at which the motors should
+     *                begin holding their position
      */ 
-
+        void setHoldThreshold(double degrees);
     /*-------------------
      * Movement functions
      *-------------------*/ 
 
     /**
-     * A function used to control the lift while in opcontrol.
-     * It takes in the ID of the controller (generally this will be CONTROLLER_MASTER),
-     * as well as which buttons control the lift
+     * Function: driver
+     * This function is used to control the lift while in opcontrol.
      * 
-     * @param controller The controller object representing the physical controller
+     * @param controller The controller ID representing the physical controller
      * @param upButton The button on the controller used to move the lift up
      * @param downButton The button on the controller used to move the lift down
      */ 
@@ -105,16 +112,19 @@ class Lift {
            pros::controller_digital_e_t upButton, pros::controller_digital_e_t downButton);
 
     /**
-     * A function to encapsulate moving the lift up 
+     * Function: up
+     * Wraps the MotorGroup calls to move the lift up
      */ 
         void up();
     /**
-     * A function to encapsulate moving the lift down 
+     * Function: down
+     * Wraps the MotorGroup calls to move the lift down
      */ 
         void down();
     /**
-     * A function to encapsulate stopping the lift. 
-     */         
+     * Function: stop
+     * Wraps the MotorGroup calls to stop the lift
+     */    
         void stop();
 };
 
