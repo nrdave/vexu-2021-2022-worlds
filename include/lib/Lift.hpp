@@ -4,6 +4,8 @@
 #include "lib/MotorGroup.hpp"
 
 /**
+ * \file Lift.hpp
+ * 
  * The Lift class is used to abstract any sort of lift. It provides a simple interface to
  * control a MotorGroup.
  * 

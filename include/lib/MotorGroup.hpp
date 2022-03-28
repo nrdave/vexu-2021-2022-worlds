@@ -20,8 +20,6 @@ class MotorGroup {
         std::vector<int> motorPorts;
 
     public:
-
-    /* Movement Functions */
         /**
          * The Constructor for a MotorGroup 
          * 
@@ -29,7 +27,10 @@ class MotorGroup {
          * @param revs A list of whether each motor in the group is reversed
          */
             MotorGroup(std::initializer_list<int> ports, std::initializer_list<bool> revs);
-    
+
+    /*-------------------
+     * Movement functions
+     *-------------------*/         
         /**
          * Function: move
          * This function serves as a "wrapper" for the pros::Motor::move function.
@@ -77,7 +78,10 @@ class MotorGroup {
          */ 
             void moveVoltage(int voltage);  
 
-    /* Configuration Functions */
+    
+    /**------------------------
+     * Configuration Functions
+     *-------------------------*/ 
         /**
          * Function: setEncoderUnits
          * This function sets the encoder units to be used by all of the motors.
@@ -105,7 +109,9 @@ class MotorGroup {
          */ 
             void setGearing(pros::motor_gearset_e_t  gearing);
 
-        /* Telemetry Functions */
+    /**-------------------
+     * Telemetry Functions
+     *--------------------*/
         /**
          * Function getPosition
          * This function returns the average current position of every motor
