@@ -82,8 +82,8 @@ class Lift {
      * having a lift go down slower is a good idea, as it prevents
      * a rough impact on wherever the end of the lift rests.
      * 
-     * @param maxUpSpeed The maximum speed of the motors while going up, in RPM
-     * @param maxDownSpeed The maximum speed of the motors while going down, in RPM
+     * @param maxUpRPM The maximum speed of the motors while going up, in RPM
+     * @param maxDownRPM The maximum speed of the motors while going down, in RPM
      */ 
         void setMaxSpeeds(int maxUpRPM, int maxDownRPM);
 
