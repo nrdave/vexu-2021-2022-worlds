@@ -19,5 +19,8 @@ void opcontrol() {
             controller.getAnalog(okapi::ControllerAnalog::leftY),
             controller.getAnalog(okapi::ControllerAnalog::leftX));
         lift.driver(CONTROLLER_MASTER, DIGITAL_R1, DIGITAL_R2);
+
+        claw.driver(CONTROLLER_MASTER, DIGITAL_L1, DIGITAL_L2, DIGITAL_A,
+                    DIGITAL_B);
     }
 }

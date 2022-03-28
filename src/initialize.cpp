@@ -6,6 +6,7 @@ okapi::Controller controller;
 
 // lift, as an extern class, must be initialized in the global scope
 Lift lift({20, 10}, {false, true});
+Claw claw({9}, {false});
 
 // Declaring all LVGL objects
 lv_obj_t* pageMain;
@@ -25,9 +26,14 @@ void initialize() {
                                 {{3.25_in, 11_in}, okapi::quadEncoderTPR})
                 .build();
 
+    // Configuring lift
     lift.setExternalGearRatio(12.0 / 60.0);
     lift.setGearing(MOTOR_GEARSET_06);
     lift.setMaxSpeeds(75, 60);
+
+    // Configuring claw
+    claw.setGearing(MOTOR_GEARSET_18);
+    claw.setMaxSpeed(100);
 
     // Initialize GUI
     LV_IMG_DECLARE(background)

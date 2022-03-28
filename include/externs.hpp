@@ -1,5 +1,6 @@
-#include "okapi/api.hpp"
+#include "lib/Claw.hpp"
 #include "lib/Lift.hpp"
+#include "okapi/api.hpp"
 
 #ifndef EXTERNS_HPP
 #define EXTERNS_HPP
@@ -12,4 +13,6 @@ extern okapi::Controller controller;
 // My Subsytem objects
 extern Lift lift;
 
-#endif // externs.hpp
+extern Claw claw;
+
+#endif  // externs.hpp
