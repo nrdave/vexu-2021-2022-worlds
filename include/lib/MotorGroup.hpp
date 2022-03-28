@@ -1,10 +1,10 @@
 /**
  * \file MotorGroup.hpp 
  * 
- * 
- * 
- * 
- * 
+ * The MotorGroup class is the base of every class I write.
+ * It encapsulates the PROS C Motor API by storing a vector
+ * of ports for each motor and wrapping most PROS
+ * functions so that they are called on all motors in the group. 
  */
 
 #ifndef MOTORGROUP_HPP
@@ -106,6 +106,11 @@ class MotorGroup {
             void setGearing(pros::motor_gearset_e_t  gearing);
 
         /* Telemetry Functions */
+        /**
+         * Function getPosition
+         * This function returns the average current position of every motor
+         * in the group. 
+         */ 
             double getPosition();
 };
 
