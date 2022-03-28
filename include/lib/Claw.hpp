@@ -130,27 +130,33 @@ class Claw {
 
     /**
      * Function: openTo
-     * Rotates the claw open by a given degree amount, or by a default rotation
-     * given using setDigitalRotation.
+     * Rotates the claw open by a given degree amount.
      *
      * @param degrees The amount of degrees to rotate the claw open by
-     *                If no value is provided, use digitalRotation
-     * @param hold indicates whether the motors should hold the claw's position,
-     * or let it spin
      */
-    void openTo(double degrees = digitalRotation);
+    void openTo(double degrees);
 
     /**
      * Function: closeTo
-     * Rotates the claw closed by a given degree amount, or by a default
-     * rotation given using setDigitalRotation.
+     * Rotates the claw closed by a given degree amount.
      *
      * @param degrees The amount of degrees to rotate the claw closed by
-     *                If no value is provided, use digitalRotation
-     * @param hold indicates whether the motors should hold the claw's position,
-     * or let it spin
      */
-    void closeTo(double degrees = digitalRotation);
+    void closeTo(double degrees);
+
+    /**
+     * Function: openTo
+     * Calls openTo with digitalRotation (the default rotation of the claw in
+     * digital control)
+     */
+    void openTo();
+
+    /**
+     * Function: closeTo
+     * Calls openTo with digitalRotation (the default rotation of the claw in
+     * digital control)
+     */
+    void closeTo();
 };
 
 #endif  // Claw.hpp
