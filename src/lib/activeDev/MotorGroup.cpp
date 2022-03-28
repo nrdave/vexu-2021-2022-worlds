@@ -61,8 +61,7 @@ void MotorGroup::setGearing(pros::motor_gearset_e_t gearing) {
 
 double MotorGroup::getPosition() {
     double sum = 0;
-    for(int p : motorPorts){
-        sum += pros::c::motor_get_position(p)
-    }
+    for(int p : motorPorts)
+        sum += pros::c::motor_get_position(p);
     return sum / motorPorts.size();
 }
