@@ -1,0 +1,75 @@
+#include "Claw.hpp"
+
+Claw::Claw(std::initializer_list<int> ports, std::initializer_list<bool> revs)
+    : motors(ports, revs) {
+    // Encoders output their rotation in degrees (Other options don't really
+    // make sense)
+    motors.setEncoderUnits(
+        pros::motor_encoder_units_e::E_MOTOR_ENCODER_DEGREES);
+}
+
+void Claw::setGearing(pros::motor_gearset_e_t gearing) {
+    motors.setGearing(gearing);
+}
+
+void Claw::setMaxSpeed(int maxRPM) { maxSpd = maxRPM; }
+
+void Claw::setDigitalRotation(double degrees) { digitalRotation = degrees; }
+
+void Claw::driver(pros::controller_id_e_t controller,
+                  pros::controller_digital_e_t openButton,
+                  pros::controller_digital_e_t closeButton) {
+    if (pros::c::controller_get_digital(controller, openButton))
+        open();
+    else if (pros::c::controller_get_digital(controller, closeButton))
+        close();
+    else
+        motors.moveVelocity(0);
+}
+
+void Claw::driver(pros::controller_id_e_t controller,
+                  pros::controller_digital_e_t openButton,
+                  pros::controller_digital_e_t closeButton,
+                  pros::controller_digital_e_t digitalOpenButton,
+                  pros::controller_digital_e_t digitalCloseButton) {
+    if (pros::c::controller_get_digital(controller, digitalOpenButton))
+        openTo(false);
+    else if (pros::c::controller_get_digital(controller, digitalCloseButton))
+        closeTo(true);
+    else
+        // If neither digital button is pressed, call the simpler driver
+        // function for analog control
+        driver(controller, openButton, closeButton);
+}
+
+void Claw::open() {
+    // If the claw is opening, holding position is not important. So, it's
+    // better to not have the motors hold position
+    motors.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+    // The direction for the motors to rotate in order to open the claw is
+    // assumed to be negative
+    motors.moveVelocity(-maxSpd);
+}
+
+void Claw::close() {
+    // If the claw is closing, holding position is important in order to ensure
+    // that the object being held is not let go of.
+    motors.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+    motors.moveVelocity(maxSpd);
+}
+
+void Claw::openTo(double degrees = digitalRotation) {
+    // If the claw is opening, holding position is not important. So, it's
+    // better to not have the motors hold position
+    motors.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+    // The direction for the motors to rotate in order to open the claw is
+    // assumed to be negative
+    motors.moveRelative(-degrees, maxSpd);
+}
+
+void Claw::closeTo(double degrees = digitalRotation) {
+    // If the claw is closing, holding position is important in order to ensure
+    // that the object being held is not let go of.
+    motors.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+    motors.moveRelative(degrees, maxSpd);
+}
