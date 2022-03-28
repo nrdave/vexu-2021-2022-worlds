@@ -1,4 +1,4 @@
-#include "Claw.hpp"
+#include "lib/Claw.hpp"
 
 Claw::Claw(std::initializer_list<int> ports, std::initializer_list<bool> revs)
     : motors(ports, revs) {
