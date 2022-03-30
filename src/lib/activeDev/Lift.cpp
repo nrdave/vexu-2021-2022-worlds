@@ -34,7 +34,7 @@ void Lift::driver(pros::controller_id_e_t controller,
 
 void Lift::up() { motors.moveVelocity(maxUpSpd); }
 
-void Lift::down() { motors.moveVelocity(maxDownSpd); }
+void Lift::down() { motors.moveVelocity(-maxDownSpd); }
 
 void Lift::stop() {
     /** If the motors current position is less than the holdThreshold *
@@ -46,7 +46,7 @@ void Lift::stop() {
      * extGearRatio represents the number of rotations done by the lift in one
      * full rotation of the motor.
      */
-    if (motors.getPosition() <= (holdThreshold * extGearRatio))
+    if (motors.getPosition() <= (holdThreshold / extGearRatio))
         motors.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
     else
         motors.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
