@@ -47,6 +47,10 @@ using namespace okapi::literals;
 
 // User Files
 #include "externs.hpp"
+#include "lib/Claw.hpp"
+#include "lib/Lift.hpp"
+#include "lib/MotorGroup.hpp"
+#include "lib/gui.hpp"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
