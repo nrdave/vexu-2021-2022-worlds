@@ -5,12 +5,15 @@ std::shared_ptr<okapi::ChassisController> drive;
 okapi::Controller controller;
 
 // lift, as an extern class, must be initialized in the global scope
-Lift lift({20, 10}, {false, true});
+Lift lift({10, 20}, {false, true});
 Claw claw({9}, {false});
 
 // Declaring all LVGL objects
 lv_obj_t* pageMain;
 lv_obj_t* backgroundIMG;
+
+// Initialize GUI
+LV_IMG_DECLARE(background)
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -21,22 +24,21 @@ lv_obj_t* backgroundIMG;
 void initialize() {
     // Initializing subsystems
     drive = okapi::ChassisControllerBuilder()
-                .withMotors({11, 12}, {-3, -4})
+                .withMotors({11, 12}, {-5, -4})
                 .withDimensions(okapi::AbstractMotor::gearset::green,
                                 {{3.25_in, 11_in}, okapi::quadEncoderTPR})
+                .withSensors(okapi::ADIEncoder{'C', 'D'},
+                             okapi::ADIEncoder{'A', 'B'})
                 .build();
 
     // Configuring lift
     lift.setExternalGearRatio(12.0 / 60.0);
-    lift.setGearing(MOTOR_GEARSET_06);
-    lift.setMaxSpeeds(75, 60);
+    lift.setGearing(MOTOR_GEARSET_18);
+    lift.setMaxSpeeds(150, 120);
 
     // Configuring claw
     claw.setGearing(MOTOR_GEARSET_18);
-    claw.setMaxSpeed(100);
-
-    // Initialize GUI
-    LV_IMG_DECLARE(background)
+    claw.setMaxSpeed(60);
 
     pageMain = lv_page_create(lv_scr_act(), NULL);
     lv_obj_align(pageMain, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
