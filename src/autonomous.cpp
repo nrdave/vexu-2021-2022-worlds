@@ -11,95 +11,97 @@
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
+Autonomous::Routine Autonomous::autonID = Autonomous::Routine::none;
+
 void autonomous() {
-    switch
-        auton {
-            case Auton::competition_sideGoal:
+    switch (Autonomous::autonID) {
+        case Autonomous::Routine::competition_sideGoal:
 
-                // Gets ring on alliance goal, then gets side neutral goal
-                // Score ring
-                drive->moveDistance(5);
-                claw.closeTo(110);
+            // Gets ring on alliance goal, then gets side neutral goal
+            // Score ring
+            drive->moveDistance(5_in);
+            claw.closeTo(110);
 
-                // Move alliance mobile goal to middle
-                drive->moveDistance(-5);
-                drive->turnAngle(-75);
-                drive->moveDistance(30);
-                drive->turnAngle(75);
+            // Move alliance mobile goal to middle
+            drive->moveDistance(-5_in);
+            drive->turnAngle(-75_deg);
+            drive->moveDistance(30_in);
+            drive->turnAngle(75_deg);
 
-                // let go of mobile goal
-                claw.openTo(90);
-                drive->moveDistance(-3);
+            // let go of mobile goal
+            claw.openTo(90);
+            drive->moveDistance(-3_in);
 
-                // Go for side neutral mobile goal
-                drive->turnAngle(-85);
-                drive->moveDistance(18);
-                claw.closeTo(90);
+            // Go for side neutral mobile goal
+            drive->turnAngle(-85_deg);
+            drive->moveDistance(18_in);
+            claw.closeTo(90);
 
-                // Score side neutral goal
-                drive->moveDistance(-12, 60);
-                drive->turnAngle(180);
-                drive->moveDistance(12, 75);
+            // Score side neutral goal
+            drive->moveDistance(-12_in);
+            drive->turnAngle(180_deg);
+            drive->moveDistance(12_in);
 
-                // Set up for Driver
-                claw.openTo(90);
-                drive->moveDistance(-5, 50);
-                break;
-            case Auton::competition_middleGoal:
+            // Set up for Driver
+            claw.openTo(90);
+            drive->moveDistance(-5_in);
+            break;
+        case Autonomous::Routine::competition_middleGoal:
 
-                // Gets ring on alliance goal, then gets middle neutral goal
-                // Score ring
-                drive->moveDistance(5, 35);
-                claw.closeTo(110);
+            // Gets ring on alliance goal, then gets middle neutral goal
+            // Score ring
+            drive->moveDistance(5_in);
+            claw.closeTo(110);
 
-                // Move alliance mobile goal to middle
-                drive->moveDistance(-5, 50);
-                drive->turnAngle(-85);
-                drive->moveDistance(36, 50);
+            // Move alliance mobile goal to middle
+            drive->moveDistance(-5_in);
+            drive->turnAngle(-85_deg);
+            drive->moveDistance(36_in);
 
-                // clear rings using alliance goal
-                drive->turnAngle(105);
+            // clear rings using alliance goal
+            drive->turnAngle(105_deg);
 
-                // let go of mobile goal
-                drive->moveDistance(3, 50);
-                claw.openTo(90);
-                drive->moveDistance(-3, 20);
+            // let go of mobile goal
+            drive->moveDistance(3_in);
+            claw.openTo(90);
+            drive->moveDistance(-3_in);
 
-                // Go for middle neutral mobile goal
-                drive->turnAngle(-50);
-                drive->moveDistance(30, 60);
-                claw.closeTo(90);
+            // Go for middle neutral mobile goal
+            drive->turnAngle(-50_deg);
+            drive->moveDistance(30_in);
+            claw.closeTo(90);
 
-                // Score middle neutral goal
-                drive->moveDistance(-18, 50);
-                drive->turnAngle(180);
-                drive->moveDistance(36, 60);
+            // Score middle neutral goal
+            drive->moveDistance(-18_in);
+            drive->turnAngle(180_deg);
+            drive->moveDistance(36_in);
 
-                // Set up for Driver
-                claw.openTo(90);
-                drive->moveDistance(-5, 50);
-                drive->turnAngle(135);
+            // Set up for Driver
+            claw.openTo(90);
+            drive->moveDistance(-5_in);
+            drive->turnAngle(135_deg);
 
-                break;
-            case Auton::skills:
-                // Skills Auton
-                // Score ring
-                drive->moveDistance(5_in);
-                claw.closeTo(110);
+            break;
+        case Autonomous::Routine::skills:
+            // Skills Auton
+            // Score ring
+            drive->moveDistance(5_in);
+            claw.closeTo(110);
 
-                // Move around platform
-                drive->moveDistance(-5_in);
-                drive->turnAngle(-90_deg);
+            // Move around platform
+            drive->moveDistance(-5_in);
+            drive->turnAngle(-90_deg);
 
-                // Push blue mogo to blue home zone
-                drive->moveDistance(80_in);
-                drive->turnAngle(-30_deg);
-                claw.openTo(90);
-                drive->moveDistance(-10_in);
-                break;
-            case Auton::none:
-                break;
-            default:
-                break;
-        }
+            // Push blue mogo to blue home zone
+            drive->moveDistance(80_in);
+            drive->turnAngle(-30_deg);
+            claw.openTo(90);
+            drive->moveDistance(-10_in);
+            break;
+        case Autonomous::Routine::none:
+            break;
+        default:
+            break;
+    }
 }

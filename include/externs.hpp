@@ -1,6 +1,7 @@
 #include "lib/Claw.hpp"
 #include "lib/Lift.hpp"
-#include "lib/autonEnums.hpp"
+#include "lib/autonomous.hpp"
+#include "lib/gui.hpp"
 #include "okapi/api.hpp"
 
 #ifndef EXTERNS_HPP
@@ -15,8 +16,5 @@ extern okapi::Controller controller;
 extern Lift lift;
 
 extern Claw claw;
-
-// extern Auton enum for specifying which autonomous routine to run
-extern Auton auton;
 
 #endif  // externs.hpp

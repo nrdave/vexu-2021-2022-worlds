@@ -4,16 +4,9 @@
 std::shared_ptr<okapi::ChassisController> drive;
 okapi::Controller controller;
 
-// lift, as an extern class, must be initialized in the global scope
+// lift and claw, as extern objects, must be initialized in the global scope
 Lift lift({10, 20}, {false, true});
 Claw claw({9}, {false});
-
-// Declaring all LVGL objects
-lv_obj_t* pageMain;
-lv_obj_t* backgroundIMG;
-
-// Initialize GUI
-LV_IMG_DECLARE(background)
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -21,6 +14,17 @@ LV_IMG_DECLARE(background)
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+LV_IMG_DECLARE(background)
+const char* Autonomous::buttonMatrixList[] = {"None",
+                                              "\n",
+                                              "Competition - Side Goal",
+                                              "\n",
+                                              "Competition - Middle Goal",
+
+                                              "\n",
+                                              "Skills",
+                                              ""};
+
 void initialize() {
     // Initializing subsystems
     drive = okapi::ChassisControllerBuilder()
@@ -40,12 +44,30 @@ void initialize() {
     claw.setGearing(MOTOR_GEARSET_18);
     claw.setMaxSpeed(60);
 
-    pageMain = lv_page_create(lv_scr_act(), NULL);
-    lv_obj_align(pageMain, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
-    lv_obj_set_size(pageMain, 480, 480);
+    GUI::scrMain = lv_obj_create(NULL, NULL);
+    GUI::scrAuton = lv_obj_create(NULL, NULL);
 
-    backgroundIMG = lv_img_create(pageMain, NULL);
-    lv_img_set_src(backgroundIMG, &background);
+    GUI::backgroundIMG = lv_img_create(GUI::scrMain, NULL);
+    lv_img_set_src(GUI::backgroundIMG, &background);
+    lv_obj_align(GUI::backgroundIMG, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+
+    GUI::navToAuton = GUI::createButton(GUI::scrMain, LV_BTN_ACTION_CLICK,
+                                        GUI::goToAuton, "Auton Menu");
+    lv_obj_align(GUI::navToAuton, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
+
+    GUI::navFromAuton = GUI::createButton(GUI::scrAuton, LV_BTN_ACTION_CLICK,
+                                          GUI::goToMain, "Home Screen");
+    lv_obj_align(GUI::navFromAuton, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
+
+    GUI::autonSelect = GUI::createButtonMatrix(
+        GUI::scrAuton, Autonomous::buttonMatrixList, GUI::updateAutonID);
+    lv_obj_align(GUI::autonSelect, NULL, LV_ALIGN_IN_TOP_MID, 35, 20);
+    lv_obj_set_size(GUI::autonSelect, 300, 200);
+
+    GUI::curAutonLbl = GUI::createLabel(GUI::scrAuton, "Auton");
+    lv_obj_align(GUI::curAutonLbl, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
+
+    lv_scr_load(GUI::scrMain);
 }
 
 /**
