@@ -50,6 +50,7 @@ using namespace okapi::literals;
 #include "lib/Claw.hpp"
 #include "lib/Lift.hpp"
 #include "lib/MotorGroup.hpp"
+#include "lib/autonEnums.hpp"
 #include "lib/gui.hpp"
 
 /**
