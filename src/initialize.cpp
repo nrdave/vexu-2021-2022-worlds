@@ -15,22 +15,13 @@ Claw claw({9}, {false});
  * to keep execution time for this mode under a few seconds.
  */
 LV_IMG_DECLARE(background)
-const char* Autonomous::buttonMatrixList[] = {"None",
-                                              "\n",
-                                              "Competition - Side Goal",
-                                              "\n",
-                                              "Competition - Middle Goal",
-
-                                              "\n",
-                                              "Skills",
-                                              ""};
 
 void initialize() {
     // Initializing subsystems
     drive = okapi::ChassisControllerBuilder()
                 .withMotors({11, 12}, {-5, -4})
                 .withDimensions(okapi::AbstractMotor::gearset::green,
-                                {{3.25_in, 11_in}, okapi::quadEncoderTPR})
+                                {{3.25_in, 10_in}, okapi::quadEncoderTPR})
                 .withSensors(okapi::ADIEncoder{'C', 'D'},
                              okapi::ADIEncoder{'A', 'B'})
                 .build();
@@ -61,8 +52,8 @@ void initialize() {
 
     GUI::autonSelect = GUI::createButtonMatrix(
         GUI::scrAuton, Autonomous::buttonMatrixList, GUI::updateAutonID);
-    lv_obj_align(GUI::autonSelect, NULL, LV_ALIGN_IN_TOP_MID, 35, 20);
-    lv_obj_set_size(GUI::autonSelect, 300, 200);
+    lv_obj_align(GUI::autonSelect, NULL, LV_ALIGN_IN_TOP_RIGHT, -10, 20);
+    lv_obj_set_size(GUI::autonSelect, 250, 200);
 
     GUI::curAutonLbl = GUI::createLabel(GUI::scrAuton, "Auton");
     lv_obj_align(GUI::curAutonLbl, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
