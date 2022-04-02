@@ -2,9 +2,8 @@
 
 /* The Constructor for MotorGroup*/
 MotorGroup::MotorGroup(std::initializer_list<int> ports,
-                       std::initializer_list<bool> revs) {
-    /* Store the ports in the motorPorts vector*/
-    motorPorts = ports;
+                       std::initializer_list<bool> revs)
+    : motorPorts{ports} {
     std::vector<bool> motorRevs = revs;
     for (int i = 0; i < motorPorts.size(); ++i)
         // Set the reversed state of each motor to match the revs argument
