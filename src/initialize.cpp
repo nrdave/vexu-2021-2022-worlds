@@ -29,7 +29,8 @@ void initialize() {
     // Configuring lift
     lift.setExternalGearRatio(12.0 / 60.0);
     lift.setGearing(MOTOR_GEARSET_18);
-    lift.setMaxSpeeds(150, 120);
+    lift.setMaxSpeeds(150, 80);
+    lift.setHoldThreshold(20);
 
     // Configuring claw
     claw.setGearing(MOTOR_GEARSET_18);
