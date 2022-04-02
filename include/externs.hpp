@@ -15,6 +15,7 @@ extern okapi::Controller controller;
 // My Subsytem objects
 extern Lift lift;
 
-extern Claw claw;
+// extern Claw claw;
+// extern PneumaticClaw claw;
 
 #endif  // externs.hpp

@@ -14,18 +14,16 @@
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-    pros::ADIDigitalOut clawPiston('E');
-    int extendCount = 0;
-    bool extended = false;
-
     while (true) {
         drive->getModel()->tank(
             controller.getAnalog(okapi::ControllerAnalog::leftY),
             controller.getAnalog(okapi::ControllerAnalog::rightY));
         lift.driver(CONTROLLER_MASTER, DIGITAL_R1, DIGITAL_R2);
 
-        claw.driver(CONTROLLER_MASTER, DIGITAL_L1, DIGITAL_L2, DIGITAL_A,
-                    DIGITAL_B);
+        // claw.driver(CONTROLLER_MASTER, DIGITAL_L1, DIGITAL_L2, DIGITAL_A,
+        //           DIGITAL_B);
+
+        // claw.driver(CONTROLLER_MASTER, DIGITAL_A);
 
         pros::delay(20);
     }

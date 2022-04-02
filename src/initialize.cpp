@@ -6,7 +6,8 @@ okapi::Controller controller;
 
 // lift and claw, as extern objects, must be initialized in the global scope
 Lift lift({10, 20}, {false, true});
-Claw claw({9}, {false});
+// Claw claw({9}, {false});
+// PneumaticClaw claw('e', false);
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -33,8 +34,8 @@ void initialize() {
     lift.setHoldThreshold(20);
 
     // Configuring claw
-    claw.setGearing(MOTOR_GEARSET_18);
-    claw.setMaxSpeed(60);
+    // claw.setGearing(MOTOR_GEARSET_18);
+    // claw.setMaxSpeed(60);
 
     GUI::scrMain = lv_obj_create(NULL, NULL);
     GUI::scrAuton = lv_obj_create(NULL, NULL);

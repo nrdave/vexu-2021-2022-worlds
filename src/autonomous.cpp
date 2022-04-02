@@ -23,6 +23,7 @@ const char* Autonomous::buttonMatrixList[] = {
 
 void autonomous() {
     switch (Autonomous::autonID) {
+        /*
         case Autonomous::Routine::skills:
             // Skills Auton
             // Score ring
@@ -39,9 +40,7 @@ void autonomous() {
             claw.openTo(90);
             drive->moveDistance(-10_in);
             break;
-        case Autonomous::Routine::test:
-            drive->moveDistance(5_in);
-            break;
+
         case Autonomous::Routine::competition_sideGoal:
 
             // Gets ring on alliance goal, then gets side neutral goal
@@ -109,6 +108,11 @@ void autonomous() {
             drive->turnAngle(135_deg);
 
             break;
+            */
+        case Autonomous::Routine::test:
+            drive->moveDistance(5_in);
+            break;
+
         case Autonomous::Routine::none:
             break;
         default:
