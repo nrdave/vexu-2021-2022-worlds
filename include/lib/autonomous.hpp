@@ -18,6 +18,7 @@ extern const char* buttonMatrixList[];
 // Change this between years
 enum class Routine {
     none,
+    test,
     competition_sideGoal,
     competition_middleGoal,
     skills

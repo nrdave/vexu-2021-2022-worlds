@@ -12,10 +12,36 @@
  * from where it left off.
  */
 
+// Autonomous namespace variables - initialized here for organization
 Autonomous::Routine Autonomous::autonID = Autonomous::Routine::none;
+const char* Autonomous::buttonMatrixList[] = {
+    "Skills", "Test",
+    "\n",     "Competition - Side Goal",
+    "\n",     "Competition - Middle Goal",
+    "\n",     "None",
+    ""};
 
 void autonomous() {
     switch (Autonomous::autonID) {
+        case Autonomous::Routine::skills:
+            // Skills Auton
+            // Score ring
+            drive->moveDistance(5_in);
+            claw.closeTo(110);
+
+            // Move around platform
+            drive->moveDistance(-5_in);
+            drive->turnAngle(-90_deg);
+
+            // Push blue mogo to blue home zone
+            drive->moveDistance(80_in);
+            drive->turnAngle(-30_deg);
+            claw.openTo(90);
+            drive->moveDistance(-10_in);
+            break;
+        case Autonomous::Routine::test:
+            drive->moveDistance(5_in);
+            break;
         case Autonomous::Routine::competition_sideGoal:
 
             // Gets ring on alliance goal, then gets side neutral goal
@@ -82,22 +108,6 @@ void autonomous() {
             drive->moveDistance(-5_in);
             drive->turnAngle(135_deg);
 
-            break;
-        case Autonomous::Routine::skills:
-            // Skills Auton
-            // Score ring
-            drive->moveDistance(5_in);
-            claw.closeTo(110);
-
-            // Move around platform
-            drive->moveDistance(-5_in);
-            drive->turnAngle(-90_deg);
-
-            // Push blue mogo to blue home zone
-            drive->moveDistance(80_in);
-            drive->turnAngle(-30_deg);
-            claw.openTo(90);
-            drive->moveDistance(-10_in);
             break;
         case Autonomous::Routine::none:
             break;

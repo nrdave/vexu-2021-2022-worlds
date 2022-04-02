@@ -80,14 +80,17 @@ lv_res_t GUI::updateAutonID(lv_obj_t* btnm, const char* txt) {
     if (txt == "None")
         Autonomous::autonID = Autonomous::Routine::none;
 
+    else if (txt == "Test")
+        Autonomous::autonID = Autonomous::Routine::test;
+
+    else if (txt == "Competition - Side Goal")
+        Autonomous::autonID = Autonomous::Routine::competition_sideGoal;
+
     else if (txt == "Skills")
         Autonomous::autonID = Autonomous::Routine::skills;
 
-    else if (txt = "Competition - Middle Goal")
+    else if (txt == "Competition - Middle Goal")
         Autonomous::autonID = Autonomous::Routine::competition_middleGoal;
-
-    else if (txt = "Competition - Side Goal")
-        Autonomous::autonID = Autonomous::Routine::competition_sideGoal;
 
     else
         Autonomous::autonID = Autonomous::Routine::none;
@@ -108,11 +111,14 @@ void GUI::updateAutonLbl() {
         case Autonomous::Routine::skills:
             lv_label_set_text(curAutonLbl, "Skills");
             break;
-        case Autonomous::Routine::competition_middleGoal:
-            lv_label_set_text(curAutonLbl, "Competition - Middle Goal");
+        case Autonomous::Routine::test:
+            lv_label_set_text(curAutonLbl, "Test");
             break;
         case Autonomous::Routine::competition_sideGoal:
             lv_label_set_text(curAutonLbl, "Competition - Side Goal");
+            break;
+        case Autonomous::Routine::competition_middleGoal:
+            lv_label_set_text(curAutonLbl, "Competition - Middle Goal");
             break;
         case Autonomous::Routine::none:
             lv_label_set_text(curAutonLbl, "No Auton Selected");
