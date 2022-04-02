@@ -134,4 +134,4 @@ class Lift {
     void stop();
 };
 
-#endif  // Lift.hpp
+#endif /* Lift.hpp */

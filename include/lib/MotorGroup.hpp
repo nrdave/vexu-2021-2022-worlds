@@ -138,4 +138,4 @@ class MotorGroup {
     double getPosition();
 };
 
-#endif  // MOTORGROUP_HPP
+#endif /* MotorGroup.hpp */

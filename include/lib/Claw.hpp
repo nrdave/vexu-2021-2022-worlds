@@ -159,4 +159,4 @@ class Claw {
     void closeTo();
 };
 
-#endif  // Claw.hpp
+#endif /* Claw.hpp */
