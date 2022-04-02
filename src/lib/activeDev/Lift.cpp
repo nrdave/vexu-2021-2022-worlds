@@ -20,6 +20,8 @@ void Lift::setMaxSpeeds(int maxUpRPM, int maxDownRPM) {
     maxDownSpd = maxDownRPM;
 }
 
+void Lift::setHoldThreshold(double degrees) { holdThreshold = degrees; }
+
 // Movement Functions
 void Lift::driver(pros::controller_id_e_t controller,
                   pros::controller_digital_e_t upButton,
