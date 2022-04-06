@@ -14,6 +14,7 @@
 
 // Autonomous namespace variables - initialized here for organization
 Autonomous::Routine Autonomous::autonID = Autonomous::Routine::none;
+
 const char* Autonomous::buttonMatrixList[] = {
     "Skills", "Test",
     "\n",     "Competition - Side Goal",
