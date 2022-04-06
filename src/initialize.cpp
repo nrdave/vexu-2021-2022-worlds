@@ -18,15 +18,6 @@ Lift lift({10, 20}, {false, true});
 LV_IMG_DECLARE(background)
 
 void initialize() {
-    // Initializing subsystems
-    drive = okapi::ChassisControllerBuilder()
-                .withMotors({11, 12}, {-5, -4})
-                .withDimensions(okapi::AbstractMotor::gearset::green,
-                                {{3.25_in, 10_in}, okapi::quadEncoderTPR})
-                .withSensors(okapi::ADIEncoder{'C', 'D'},
-                             okapi::ADIEncoder{'A', 'B'})
-                .build();
-
     // Configuring lift
     lift.setExternalGearRatio(12.0 / 60.0);
     lift.setGearing(MOTOR_GEARSET_18);
