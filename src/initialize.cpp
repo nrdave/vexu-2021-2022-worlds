@@ -1,13 +1,10 @@
 #include "main.h"
 
-// Defining vars declared in externs
-std::shared_ptr<okapi::ChassisController> drive;
-okapi::Controller controller;
-
 // lift and claw, as extern objects, must be initialized in the global scope
 Lift lift({10, 20}, {false, true});
 // Claw claw({9}, {false});
 // PneumaticClaw claw('e', false);
+TankDrive drive({11, 12}, {4, 5}, {false, false}, {true, true});
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.

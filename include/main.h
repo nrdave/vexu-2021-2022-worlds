@@ -39,17 +39,15 @@
 /**
  * You should add more #includes here
  */
-#include "okapi/api.hpp"
+//#include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
-
-// Access to okapiLib literals
-using namespace okapi::literals;
 
 // User Files
 #include "externs.hpp"
 #include "lib/Claw.hpp"
 #include "lib/Lift.hpp"
 #include "lib/MotorGroup.hpp"
+#include "lib/TankDrive.hpp"
 #include "lib/autonomous.hpp"
 #include "lib/gui.hpp"
 
