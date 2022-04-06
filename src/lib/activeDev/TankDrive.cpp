@@ -46,17 +46,21 @@ void TankDrive::driver(pros::controller_id_e_t controller) {
 }
 
 void TankDrive::drivePID(double leftTarg, double rightTarg) {
-    short int count = 0;
+    // Counts the number of cycles the robot has not moved - used for timeout
+    // condition
+    short int stoppedCount = 0;
     double leftTarg_Deg = (leftTarg / wheelRadius) * (180 / 3.1415);
     double rightTarg_Deg = (rightTarg / wheelRadius) * (180 / 3.1415);
-    // Reset the encoders of the first motor on each side
+    // Reset the encoders of  each side
     resetPositions();
-    // Declare or initialize all variables used in the loop
+
+    // Declare or initialize all variables used in the PID controller loop
     double leftError = leftTarg_Deg - getLeftPosition();
     double rightError = rightTarg_Deg - getRightPosition();
     double leftOutput;
     double rightOutput;
     double voltCap = 0.0;
+
     // Integral variables are initiated so that the += operator can be used
     // throughout the while loop
     double leftIntegral = 0;
@@ -68,7 +72,7 @@ void TankDrive::drivePID(double leftTarg, double rightTarg) {
     double rightPrevError;
     // Enter a while loop that runs until both sides are within 10 degrees
     // of target rotation
-    while (abs(leftError) > 5 || abs(rightError) > 5) {
+    while ((abs(leftError) > 5 || abs(rightError) > 5) && stoppedCount < 5) {
         printf("\nLeft Targ: %f, Left Error: %f", leftTarg_Deg, leftError);
         printf("\nRight Targ: %f, Right Error: %f", rightTarg_Deg, rightError);
         // Calculate the integral
@@ -113,10 +117,9 @@ void TankDrive::drivePID(double leftTarg, double rightTarg) {
         // Timeout condition in case the drive gets stuck - rather not get to
         // correct position and continue than stop entirely
         if (leftError == leftPrevError && rightError == rightPrevError)
-            count++;
+            stoppedCount++;
         else
-            count = 0;
-        if (count >= 5) break;
+            stoppedCount = 0;
         pros::delay(20);
     }
     leftMotors.moveVelocity(0);
@@ -136,13 +139,25 @@ void TankDrive::turnAngle(double angle) {
      * Converting the angle to turn into the length of the arc each side needs
      * to turn.
      *
-     * Uses the arc length formula: s = r * theta
+     * Uses the arc length formula: s = r * theta, where r is encoderRadius,
+     * angle is the angle to turn (converted to radians), and turnLength is the
+     * arc length, or the length each side of the base needs to travel
      */
     double turnLength = angle * encoderRadius * (3.1415 / 180);
+
+    /**
+     * Calling the drivePID. The right side gets -turnLength as that causes the
+     * robot to turn clockwise (right) when a positive angle is entered
+     */
+    drivePID(turnLength, -turnLength);
 }
 
 // Telemetry Functions
 double TankDrive::getLeftPosition() {
+    /**
+     * If the drivetrain has ADI encoders, use them for the position. If not,
+     * use the internal motor encoders
+     */
     if (leftEncoder != NULL)
         return leftEncoder->get_value();
     else
@@ -150,6 +165,10 @@ double TankDrive::getLeftPosition() {
 }
 
 double TankDrive::getRightPosition() {
+    /**
+     * If the drivetrain has ADI encoders, use them for the position. If not,
+     * use the internal motor encoders
+     */
     if (rightEncoder != NULL)
         return rightEncoder->get_value();
     else
@@ -161,6 +180,7 @@ void TankDrive::resetPositions() {
         leftEncoder->reset();
     else
         leftMotors.resetPosition();
+
     if (rightEncoder != NULL)
         rightEncoder->reset();
     else
