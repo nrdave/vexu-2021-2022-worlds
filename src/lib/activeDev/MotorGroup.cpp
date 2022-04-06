@@ -58,3 +58,7 @@ double MotorGroup::getPosition() {
     for (int p : motorPorts) sum += pros::c::motor_get_position(p);
     return sum / motorPorts.size();
 }
+
+void MotorGroup::resetPosition() {
+    for (int p : motorPorts) pros::c::motor_tare_position(p);
+}

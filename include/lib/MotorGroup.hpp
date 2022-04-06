@@ -136,6 +136,12 @@ class MotorGroup {
      * @returns The average position of the
      */
     double getPosition();
+
+    /**
+     * Function resetPosition
+     * This function resets the position of the internal motor encoders
+     */
+    void resetPosition();
 };
 
 #endif /* MotorGroup.hpp */
