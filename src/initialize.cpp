@@ -28,24 +28,24 @@ void initialize() {
     GUI::scrMain = lv_obj_create(NULL, NULL);
     GUI::scrAuton = lv_obj_create(NULL, NULL);
 
-    GUI::backgroundIMG = lv_img_create(GUI::scrMain, NULL);
+    lv_img_create(GUI::backgroundIMG, GUI::scrMain, NULL);
     lv_img_set_src(GUI::backgroundIMG, &background);
     lv_obj_align(GUI::backgroundIMG, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 
-    GUI::navToAuton = GUI::createButton(GUI::scrMain, LV_BTN_ACTION_CLICK,
-                                        GUI::goToAuton, "Auton Menu");
+    GUI::createButton(GUI::navToAuton, GUI::scrMain, LV_BTN_ACTION_CLICK,
+                      GUI::goToAuton, "Auton Menu");
     lv_obj_align(GUI::navToAuton, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
 
-    GUI::navFromAuton = GUI::createButton(GUI::scrAuton, LV_BTN_ACTION_CLICK,
-                                          GUI::goToMain, "Home Screen");
+    GUI::createButton(GUI::navFromAuton, GUI::scrAuton, LV_BTN_ACTION_CLICK,
+                      GUI::goToMain, "Home Screen");
     lv_obj_align(GUI::navFromAuton, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
 
-    GUI::autonSelect = GUI::createButtonMatrix(
-        GUI::scrAuton, Autonomous::buttonMatrixList, GUI::updateAutonID);
+    GUI::createButtonMatrix(GUI::autonSelect, GUI::scrAuton,
+                            Autonomous::buttonMatrixList, GUI::updateAutonID);
     lv_obj_align(GUI::autonSelect, NULL, LV_ALIGN_IN_TOP_RIGHT, -10, 20);
     lv_obj_set_size(GUI::autonSelect, 250, 200);
 
-    GUI::curAutonLbl = GUI::createLabel(GUI::scrAuton, "Auton");
+    GUI::createLabel(GUI::curAutonLbl, GUI::scrAuton, "Auton");
     lv_obj_align(GUI::curAutonLbl, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
 
     lv_scr_load(GUI::scrMain);
