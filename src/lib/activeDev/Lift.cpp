@@ -4,8 +4,7 @@ Lift::Lift(std::initializer_list<int> ports, std::initializer_list<bool> revs)
     : motors(ports, revs) {
     // Encoders output their rotation in degrees (Other options don't really
     // make sense)
-    motors.setEncoderUnits(
-        pros::motor_encoder_units_e::E_MOTOR_ENCODER_DEGREES);
+    motors.setEncoderUnits(pros::E_MOTOR_ENCODER_DEGREES);
 }
 
 // Configuration Functions
