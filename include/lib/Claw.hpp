@@ -1,6 +1,8 @@
 #ifndef CLAW_HPP
 #define CLAW_HPP
 
+#include <initializer_list>
+
 #include "lib/MotorGroup.hpp"
 
 /**

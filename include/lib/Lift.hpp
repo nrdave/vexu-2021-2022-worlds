@@ -1,6 +1,8 @@
 #ifndef LIFT_HPP
 #define LIFT_HPP
 
+#include <initializer_list>
+
 #include "lib/MotorGroup.hpp"
 
 /**
