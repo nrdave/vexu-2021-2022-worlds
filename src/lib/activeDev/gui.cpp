@@ -1,22 +1,10 @@
 #include "lib/gui.hpp"
 
-#include "lib/autonomous.hpp"
-
 /**
- * The implementations for the GUI namespace functions, along with the
- * declarations of all LVGL objects used.
- * The functions initialize LVGL objects or handle
- * event triggers from those objects.
+ * The implementations for the GUI namespace functions.
+ * The functions initialize LVGL objects, as well as doing some configuration
+ * for the objects.
  */
-
-// LGVL objects
-lv_obj_t* GUI::scrMain;
-lv_obj_t* GUI::scrAuton;
-lv_obj_t* GUI::backgroundIMG;
-lv_obj_t* GUI::navToAuton;
-lv_obj_t* GUI::navFromAuton;
-lv_obj_t* GUI::autonSelect;
-lv_obj_t* GUI::curAutonLbl;
 
 void GUI::createButton(lv_obj_t* object, lv_obj_t* parent,
                        lv_btn_action_t pressType, lv_action_t function,
@@ -27,7 +15,8 @@ void GUI::createButton(lv_obj_t* object, lv_obj_t* parent,
     lv_btn_set_action(object, pressType, function);
 
     // Creating a label for the button
-    lv_obj_t* label = createLabel(object, text);
+    lv_obj_t* label;
+    createLabel(label, object, text);
     lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
 }
 
@@ -47,76 +36,4 @@ void GUI::createButtonMatrix(lv_obj_t* object, lv_obj_t* parent,
     lv_btnm_set_action(object, function);
     // Set the String array to be used to create the button matrix
     lv_btnm_set_map(object, map);
-}
-
-lv_res_t GUI::updateAutonID(lv_obj_t* btnm, const char* txt) {
-    /**
-     * Running the current selected button in the matrix through a
-     * series of if-else-if statements to determine which autonomous
-     * routine is selected. If there are any issues, the function
-     * defaults to no autonomous
-     */
-    if (txt == "None")
-        Autonomous::autonID = Autonomous::Routine::none;
-
-    else if (txt == "Test")
-        Autonomous::autonID = Autonomous::Routine::test;
-
-    else if (txt == "Competition - Side Goal")
-        Autonomous::autonID = Autonomous::Routine::competition_sideGoal;
-
-    else if (txt == "Skills")
-        Autonomous::autonID = Autonomous::Routine::skills;
-
-    else if (txt == "Competition - Middle Goal")
-        Autonomous::autonID = Autonomous::Routine::competition_middleGoal;
-
-    else
-        Autonomous::autonID = Autonomous::Routine::none;
-
-    // Updating the label for the current selected autonomous
-    updateAutonLbl();
-    return LV_RES_OK;
-}
-
-void GUI::updateAutonLbl() {
-    /**
-     * Using autonID as a switch, the function determines
-     * the current autonomous routine selected and sets
-     * the current Autonomous label to the corresponding
-     * text
-     */
-    switch (Autonomous::autonID) {
-        case Autonomous::Routine::skills:
-            lv_label_set_text(curAutonLbl, "Skills");
-            break;
-        case Autonomous::Routine::test:
-            lv_label_set_text(curAutonLbl, "Test");
-            break;
-        case Autonomous::Routine::competition_sideGoal:
-            lv_label_set_text(curAutonLbl, "Competition - Side Goal");
-            break;
-        case Autonomous::Routine::competition_middleGoal:
-            lv_label_set_text(curAutonLbl, "Competition - Middle Goal");
-            break;
-        case Autonomous::Routine::none:
-            lv_label_set_text(curAutonLbl, "No Auton Selected");
-            break;
-    }
-}
-
-/**
- * LVGL doesn't allow functions with parameters to be a callback function for a
- * button action, so I had to wrap a few functions, such as lv_scr_load(), which
- * loads a screen, in a format that the lv_btn_set_action() function would
- * accept
- */
-lv_res_t GUI::goToAuton(lv_obj_t* btn) {
-    lv_scr_load(scrAuton);
-    return LV_RES_OK;
-}
-
-lv_res_t GUI::goToMain(lv_obj_t* btn) {
-    lv_scr_load(scrMain);
-    return LV_RES_OK;
 }

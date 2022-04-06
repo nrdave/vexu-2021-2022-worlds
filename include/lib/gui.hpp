@@ -12,16 +12,6 @@
  */
 
 namespace GUI {
-
-// Declaring all LVGL objects
-extern lv_obj_t* scrMain;
-extern lv_obj_t* scrAuton;
-extern lv_obj_t* backgroundIMG;
-extern lv_obj_t* navToAuton;
-extern lv_obj_t* navFromAuton;
-extern lv_obj_t* autonSelect;
-extern lv_obj_t* curAutonLbl;
-
 /**
  * A function to create an LVGL button object. It packages all the LVGL
  * functions to create, set the press type and action, and align a button
@@ -64,25 +54,6 @@ void createLabel(lv_obj_t* object, lv_obj_t* parent, const char* text);
  */
 void createButtonMatrix(lv_obj_t* object, lv_obj_t* parent, const char* map[],
                         lv_btnm_action_t function);
-
-/**
- * The callback function for the auton selection button matrix
- * Although the function is never explicitly called, the parameters
- * exist to allow LVGL to pass in the needed values from the button
- * matrix
- *
- * As such, the parameters are not defined here.
- */
-lv_res_t updateAutonID(lv_obj_t* btnm, const char* txt);
-
-// The function to update label displaying the selected autonomous routine
-void updateAutonLbl();
-
-// Functions to navigate to specific LVGL Screens. Used in the navigation
-// buttons
-lv_res_t goToMain(lv_obj_t* btn);
-lv_res_t goToAuton(lv_obj_t* btn);
-
 }  // namespace GUI
 
 #endif  // gui.hpp
