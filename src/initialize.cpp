@@ -40,7 +40,7 @@ void initialize() {
     // Configuring drive
     drive.setDimensions(3.25, 10);
     drive.setGearing(pros::E_MOTOR_GEARSET_18);
-    drive.addADIEncoders('c', 'd', false, 'a', 'b', false);
+    drive.addADIEncoders('c', false, 'a', false);
 
     // Configuring claw
     // claw.setGearing(MOTOR_GEARSET_18);
