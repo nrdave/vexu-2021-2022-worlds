@@ -6,6 +6,11 @@
  * for the objects.
  */
 
+void GUI::createImage(lv_obj_t* object, lv_obj_t* parent, const void* img_src) {
+    object = lv_img_create(parent, NULL);
+    lv_img_set_src(object, img_src);
+}
+
 void GUI::createButton(lv_obj_t* object, lv_obj_t* parent,
                        lv_btn_action_t pressType, lv_action_t function,
                        const char* text) {

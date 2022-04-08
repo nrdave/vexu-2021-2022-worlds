@@ -12,6 +12,16 @@
  */
 
 namespace GUI {
+
+/**
+ * A function to create an LVGL image object. Packages the creation of the
+ * object itself with the setting of the image's source file
+ * @param object Pointer to the LVGL object in which to create an image
+ * @param parent Pointer to the parent LVGL object
+ * @param img_src Pointer to the image source
+ */
+void createImage(lv_obj_t* object, lv_obj_t* parent, const void* img_src);
+
 /**
  * A function to create an LVGL button object. It packages all the LVGL
  * functions to create, set the press type and action, and align a button
