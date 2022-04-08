@@ -48,8 +48,8 @@ class TankDrive {
      * I use pointers so that the get position functions can check if the
      * drivetrain has encoders by testing if the pointers are NULL.
      */
-    pros::ADIEncoder* leftEncoder;
-    pros::ADIEncoder* rightEncoder;
+    pros::ADIEncoder* leftEncoder = NULL;
+    pros::ADIEncoder* rightEncoder = NULL;
 
     /**
      * Function: drivePID
@@ -136,23 +136,20 @@ class TankDrive {
      * This function initializes the ADI encoders that can be used for getting
      * the robot's position.
      * @param leftEncoderTopPort The "top" port of the ADI Encoder for the left
-     * side of the drivetrain. See PROS Docs for value constraints:
+     * side of the drivetrain. The "bottom" wire must be plugged into the next
+     * port. See PROS Docs for value constraints:
      * https://pros.cs.purdue.edu/v5/api/cpp/adi.html#pros-adiencoder
-     * @param leftEncoderBottomPort The "bottom" port of the ADI Encoder for the
-     * left side of the drivetrain.
      * @param leftEncoderRev Whether or not the left encoder needs to be
      * reversed
      * @param rightEncoderTopPort The "top" port of the ADI Encoder for the
-     * right side of the drivetrain. See PROS Docs for value constraints:
+     * right side of the drivetrain. The "bottom" wire must be plugged into the
+     * next port. See PROS Docs for value constraints:
      * https://pros.cs.purdue.edu/v5/api/cpp/adi.html#pros-adiencoder
-     * @param rightEncoderBottomPort The "bottom" port of the ADI Encoder for
-     * the right side of the drivetrain.
      * @param rightEncoderRev Whether or not the right encoder needs to be
      * reversed
      */
-    void addADIEncoders(char leftEncoderTopPort, char leftEncoderBottomPort,
-                        bool leftEncoderRev, char rightEncoderTopPort,
-                        char rightEncoderBottomPort, bool rightEncoderRev);
+    void addADIEncoders(char leftEncoderTopPort, bool leftEncoderRev,
+                        char rightEncoderTopPort, bool rightEncoderRev);
 
     /*-------------------
      * Movement functions

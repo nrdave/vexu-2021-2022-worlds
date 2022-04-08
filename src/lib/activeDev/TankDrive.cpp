@@ -26,15 +26,12 @@ void TankDrive::setDimensions(double wheelDiameter, double wheelTrackWidth) {
     encoderRadius = wheelTrackWidth / 2;
 }
 
-void TankDrive::addADIEncoders(char leftEncoderTopPort,
-                               char leftEncoderBottomPort, bool leftEncoderRev,
-                               char rightEncoderTopPort,
-                               char rightEncoderBottomPort,
-                               bool rightEncoderRev) {
-    leftEncoder = new pros::ADIEncoder(leftEncoderTopPort,
-                                       leftEncoderBottomPort, leftEncoderRev);
-    rightEncoder = new pros::ADIEncoder(
-        rightEncoderTopPort, rightEncoderBottomPort, rightEncoderRev);
+void TankDrive::addADIEncoders(char leftEncoderTopPort, bool leftEncoderRev,
+                               char rightEncoderTopPort, bool rightEncoderRev) {
+    leftEncoder = new pros::ADIEncoder(leftEncoderTopPort, ++leftEncoderTopPort,
+                                       leftEncoderRev);
+    rightEncoder = new pros::ADIEncoder(rightEncoderTopPort,
+                                        ++rightEncoderTopPort, rightEncoderRev);
 }
 
 // Movement Functions
@@ -154,25 +151,31 @@ void TankDrive::turnAngle(double angle) {
 
 // Telemetry Functions
 double TankDrive::getLeftPosition() {
+    double output = 0;
     /**
      * If the drivetrain has ADI encoders, use them for the position. If not,
      * use the internal motor encoders
      */
     if (leftEncoder != NULL)
-        return leftEncoder->get_value();
+        output = leftEncoder->get_value();
     else
-        return leftMotors.getPosition();
+        output = leftMotors.getPosition();
+    printf("Left Encoder Value: %.3lf\n", output);
+    return output;
 }
 
 double TankDrive::getRightPosition() {
+    double output = 0;
     /**
      * If the drivetrain has ADI encoders, use them for the position. If not,
      * use the internal motor encoders
      */
     if (rightEncoder != NULL)
-        return rightEncoder->get_value();
+        output = rightEncoder->get_value();
     else
-        return rightMotors.getPosition();
+        output = rightMotors.getPosition();
+    printf("Right Encoder Value: %.3lf\n", output);
+    return output;
 }
 
 void TankDrive::resetPositions() {
@@ -185,4 +188,6 @@ void TankDrive::resetPositions() {
         rightEncoder->reset();
     else
         rightMotors.resetPosition();
+
+    printf("Encoders have been reset.\n");
 }
