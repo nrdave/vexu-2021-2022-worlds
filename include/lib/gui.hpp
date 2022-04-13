@@ -12,58 +12,48 @@
  */
 
 namespace GUI {
-
-/**
- * A function to create an LVGL image object. Packages the creation of the
- * object itself with the setting of the image's source file
- * @param object Pointer to the LVGL object in which to create an image
- * @param parent Pointer to the parent LVGL object
- * @param img_src Pointer to the image source
- */
-void createImage(lv_obj_t* object, lv_obj_t* parent, const void* img_src);
-
 /**
  * A function to create an LVGL button object. It packages all the LVGL
  * functions to create, set the press type and action, and align a button
  * into one function, as well as handling the creation of a label for the
  * button
  *
- * @param object Pointer to the LVGL object in which to create a button
- * @param parent Pointer to the parent LVGL object
- * @param pressType the button press type (Click, hold, long press, etc.)
- * @param function the function to be called when the button is triggered
- * @param text the label text on the button
+ * @param parent: the LVGL object the image should be created in
+ * @param pressType: the button press type (Click, hold, long press, etc.)
+ * @param function: the function to be called when the button is triggered
+ * @param text: the label text on the button
+ *
+ * @return A pointer to a new LVGL button created using the given specs
  */
-void createButton(lv_obj_t* object, lv_obj_t* parent, lv_btn_action_t pressType,
-                  lv_action_t function, const char* text);
+lv_obj_t* createButton(lv_obj_t* parent, lv_btn_action_t pressType,
+                       lv_action_t function, const char* text);
 
 /**
  * A function to create an LVGL label object. It packages all the LVGL functions
  * to create, align, and set the text of a label
  *
- * @param object Pointer to the LVGL object in which to create a button
- * @param parent Pointer to the parent LVGL object
- * @param text: the text of
- * the label
+ * @param parent: the LVGL object the image should be created in
+ * @param text: the text of the label
  *
  * @return A pointer to a new LVGL label created using the given specs
  */
-void createLabel(lv_obj_t* object, lv_obj_t* parent, const char* text);
+lv_obj_t* createLabel(lv_obj_t* parent, const char* text);
 
 /**
  * A function to create an LVGL button matrix object. It packages all the LVGL
  * functions to create, set the character map of, and align and size the button
  * matrix into one function
  *
- * @param object Pointer to the LVGL object in which to create a button
- * @param parent Pointer to the parent LVGL object
- * @param map: a pointer to a
- * String array used to generate the matrix of buttons and their labels
+ * @param parent: the LVGL object the image should be created in
+ * @param map: a pointer to a String array used to generate the matrix of
+ *             buttons and their labels
  * @param function: the function to be called when a button in the matrix is
  * clicked
+ *
+ * @return A pointer to a new LVGL button matrix created using the given specs
  */
-void createButtonMatrix(lv_obj_t* object, lv_obj_t* parent, const char* map[],
-                        lv_btnm_action_t function);
+lv_obj_t* createButtonMatrix(lv_obj_t* parent, const char* map[],
+                             lv_btnm_action_t function);
 }  // namespace GUI
 
 #endif  // gui.hpp
