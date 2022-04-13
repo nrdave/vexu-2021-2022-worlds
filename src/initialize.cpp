@@ -5,7 +5,7 @@
 Lift lift({10, 20}, {false, true});
 // Claw claw({9}, {false});
 PneumaticClaw claw('e', false);
-TankDrive drive({11, 12}, {4, 5}, {false, false}, {true, true});
+TankDrive drive({11, 12}, {4, 7}, {false, false}, {true, true});
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -38,10 +38,13 @@ void initialize() {
     lift.setHoldThreshold(20);
 
     // Configuring drive
+    // Dimensions for encoder wheels
     drive.setDimensions(2.75, 9.84375);
+    // Dimensions for drive wheels
+    // drive.setDimensions(3.25, 10);
     drive.setGearing(pros::E_MOTOR_GEARSET_18);
-    drive.addADIEncoders('c', false, 'a', false);
-    drive.setPIDConstants(100, 0, 0);
+    drive.addADIEncoders('g', false, 'a', false);
+    drive.setPIDConstants(125, 0, 0);
 
     // Configuring claw
     // claw.setGearing(MOTOR_GEARSET_18);
