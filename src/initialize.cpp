@@ -4,7 +4,7 @@
 // scope
 Lift lift({10, 20}, {false, true});
 // Claw claw({9}, {false});
-// PneumaticClaw claw('e', false);
+PneumaticClaw claw('e', false);
 TankDrive drive({11, 12}, {4, 5}, {false, false}, {true, true});
 
 /**
@@ -50,23 +50,24 @@ void initialize() {
     scrAuton = lv_obj_create(NULL, NULL);
 
     // GUI initialization
-    GUI::createImage(backgroundIMG, scrMain, &background);
+    backgroundIMG = lv_img_create(scrMain, NULL);
+    lv_img_set_src(backgroundIMG, &background);
     lv_obj_align(backgroundIMG, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 
-    GUI::createButton(navToAuton, scrMain, LV_BTN_ACTION_CLICK, goToAuton,
+    navToAuton = GUI::createButton(scrMain, LV_BTN_ACTION_CLICK, goToAuton,
                       "Auton Menu");
     lv_obj_align(navToAuton, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
 
-    GUI::createButton(navFromAuton, scrAuton, LV_BTN_ACTION_CLICK, goToMain,
+    navFromAuton = GUI::createButton(scrAuton, LV_BTN_ACTION_CLICK, goToMain,
                       "Home Screen");
     lv_obj_align(navFromAuton, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
 
-    GUI::createButtonMatrix(autonSelect, scrAuton, Autonomous::buttonMatrixList,
+    autonSelect = GUI::createButtonMatrix(scrAuton, Autonomous::buttonMatrixList,
                             updateAutonID);
     lv_obj_align(autonSelect, NULL, LV_ALIGN_IN_TOP_RIGHT, -10, 20);
     lv_obj_set_size(autonSelect, 250, 200);
 
-    GUI::createLabel(curAutonLbl, scrAuton, "Auton");
+    curAutonLbl = GUI::createLabel(scrAuton, "Auton");
     lv_obj_align(curAutonLbl, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
 
     lv_scr_load(scrMain);
