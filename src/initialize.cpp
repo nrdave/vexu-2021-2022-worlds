@@ -38,7 +38,7 @@ void initialize() {
     lift.setHoldThreshold(20);
 
     // Configuring drive
-    drive.setDimensions(3.25, 10);
+    drive.setDimensions(2.75, 9.84375);
     drive.setGearing(pros::E_MOTOR_GEARSET_18);
     drive.addADIEncoders('c', false, 'a', false);
 
@@ -55,15 +55,15 @@ void initialize() {
     lv_obj_align(backgroundIMG, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 
     navToAuton = GUI::createButton(scrMain, LV_BTN_ACTION_CLICK, goToAuton,
-                      "Auton Menu");
+                                   "Auton Menu");
     lv_obj_align(navToAuton, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
 
     navFromAuton = GUI::createButton(scrAuton, LV_BTN_ACTION_CLICK, goToMain,
-                      "Home Screen");
+                                     "Home Screen");
     lv_obj_align(navFromAuton, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
 
-    autonSelect = GUI::createButtonMatrix(scrAuton, Autonomous::buttonMatrixList,
-                            updateAutonID);
+    autonSelect = GUI::createButtonMatrix(
+        scrAuton, Autonomous::buttonMatrixList, updateAutonID);
     lv_obj_align(autonSelect, NULL, LV_ALIGN_IN_TOP_RIGHT, -10, 20);
     lv_obj_set_size(autonSelect, 250, 200);
 
