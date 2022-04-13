@@ -28,10 +28,18 @@ void TankDrive::setDimensions(double wheelDiameter, double wheelTrackWidth) {
 
 void TankDrive::addADIEncoders(char leftEncoderTopPort, bool leftEncoderRev,
                                char rightEncoderTopPort, bool rightEncoderRev) {
-    leftEncoder = new pros::ADIEncoder(leftEncoderTopPort, ++leftEncoderTopPort,
-                                       leftEncoderRev);
-    rightEncoder = new pros::ADIEncoder(rightEncoderTopPort,
-                                        ++rightEncoderTopPort, rightEncoderRev);
+    /**
+     * ADI encoders require that the two wires are in adjacent ports, with the
+     * "top" port being in one of ports A, C, E, or G. So, rather than passing
+     * in both ports, the function accepts the top port and assumes the bottom
+     * wire is in the next port.
+     */
+    leftEncoder = new pros::ADIEncoder(
+        leftEncoderTopPort, static_cast<char>(leftEncoderTopPort + 1),
+        leftEncoderRev);
+    rightEncoder = new pros::ADIEncoder(
+        rightEncoderTopPort, static_cast<char>(rightEncoderTopPort + 1),
+        rightEncoderRev);
 }
 
 // Movement Functions
