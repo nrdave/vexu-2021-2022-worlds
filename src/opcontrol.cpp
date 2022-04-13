@@ -18,10 +18,7 @@ void opcontrol() {
         drive.driver(CONTROLLER_MASTER);
         lift.driver(CONTROLLER_MASTER, DIGITAL_R1, DIGITAL_R2);
 
-        // claw.driver(CONTROLLER_MASTER, DIGITAL_L1, DIGITAL_L2, DIGITAL_A,
-        //           DIGITAL_B);
-
-        // claw.driver(CONTROLLER_MASTER, DIGITAL_A);
+        claw.driver(CONTROLLER_MASTER, DIGITAL_A);
 
         pros::delay(20);
     }
