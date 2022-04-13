@@ -41,6 +41,7 @@ void initialize() {
     drive.setDimensions(2.75, 9.84375);
     drive.setGearing(pros::E_MOTOR_GEARSET_18);
     drive.addADIEncoders('c', false, 'a', false);
+    drive.setPIDConstants(100, 0, 0);
 
     // Configuring claw
     // claw.setGearing(MOTOR_GEARSET_18);

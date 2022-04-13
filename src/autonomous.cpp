@@ -24,97 +24,96 @@ const char* Autonomous::buttonMatrixList[] = {
 
 void autonomous() {
     switch (Autonomous::autonID) {
-        /*
         case Autonomous::Routine::skills:
             // Skills Auton
             // Score ring
-            drive->moveDistance(5);
-            claw.closeTo(110);
+            drive.moveStraight(5);
+            claw.close();
 
             // Move around platform
-            drive->moveDistance(-5);
-            drive->turnAngle(-90);
+            drive.moveStraight(-5);
+            drive.turnAngle(-90);
 
             // Push blue mogo to blue home zone
-            drive->moveDistance(80);
-            drive->turnAngle(-30);
-            claw.openTo(90);
-            drive->moveDistance(-10);
-            break;
+            drive.moveStraight(80);
+            drive.turnAngle(-30);
+            claw.open();
+            drive.moveStraight(-10);
 
+            break;
         case Autonomous::Routine::competition_sideGoal:
 
             // Gets ring on alliance goal, then gets side neutral goal
             // Score ring
-            drive->moveDistance(5);
-            claw.closeTo(110);
+            drive.moveStraight(5);
+            claw.close();
 
             // Move alliance mobile goal to middle
-            drive->moveDistance(-5);
-            drive->turnAngle(-75);
-            drive->moveDistance(30);
-            drive->turnAngle(75);
+            drive.moveStraight(-5);
+            drive.turnAngle(-75);
+            drive.moveStraight(30);
+            drive.turnAngle(75);
 
             // let go of mobile goal
-            claw.openTo(90);
-            drive->moveDistance(-3);
+            claw.open();
+            drive.moveStraight(-3);
 
             // Go for side neutral mobile goal
-            drive->turnAngle(-85);
-            drive->moveDistance(18);
-            claw.closeTo(90);
+            drive.turnAngle(-85);
+            drive.moveStraight(18);
+            claw.close();
 
             // Score side neutral goal
-            drive->moveDistance(-12);
-            drive->turnAngle(180);
-            drive->moveDistance(12);
+            drive.moveStraight(-12);
+            drive.turnAngle(180);
+            drive.moveStraight(12);
 
             // Set up for Driver
-            claw.openTo(90);
-            drive->moveDistance(-5);
+            claw.open();
+            drive.moveStraight(-5);
+
             break;
         case Autonomous::Routine::competition_middleGoal:
 
             // Gets ring on alliance goal, then gets middle neutral goal
             // Score ring
-            drive->moveDistance(5);
-            claw.closeTo(110);
+            drive.moveStraight(5);
+            claw.close();
 
             // Move alliance mobile goal to middle
-            drive->moveDistance(-5);
-            drive->turnAngle(-85);
-            drive->moveDistance(36);
+            drive.moveStraight(-5);
+            drive.turnAngle(-85);
+            drive.moveStraight(36);
 
             // clear rings using alliance goal
-            drive->turnAngle(105);
+            drive.turnAngle(105);
 
             // let go of mobile goal
-            drive->moveDistance(3);
-            claw.openTo(90);
-            drive->moveDistance(-3);
+            drive.moveStraight(3);
+            claw.open();
+            drive.moveStraight(-3);
 
             // Go for middle neutral mobile goal
-            drive->turnAngle(-50);
-            drive->moveDistance(30);
-            claw.closeTo(90);
+            drive.turnAngle(-50);
+            drive.moveStraight(30);
+            claw.close();
 
             // Score middle neutral goal
-            drive->moveDistance(-18);
-            drive->turnAngle(180);
-            drive->moveDistance(36);
+            drive.moveStraight(-18);
+            drive.turnAngle(180);
+            drive.moveStraight(36);
 
             // Set up for Driver
-            claw.openTo(90);
-            drive->moveDistance(-5);
-            drive->turnAngle(135);
+            claw.open();
+            drive.moveStraight(-5);
+            drive.turnAngle(135);
 
             break;
-            */
         case Autonomous::Routine::test:
-            break;
+            drive.moveStraight(5);
 
-        case Autonomous::Routine::none:
             break;
+        case Autonomous::Routine::none:
         default:
             break;
     }
