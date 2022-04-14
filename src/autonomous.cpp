@@ -13,7 +13,7 @@
  */
 
 // Autonomous namespace variables - initialized here for organization
-Autonomous::Routine Autonomous::autonID = Autonomous::Routine::none;
+Autonomous::Routine autonID = Autonomous::Routine::none;
 
 const char* Autonomous::buttonMatrixList[] = {
     "Skills", "Test",
@@ -23,7 +23,7 @@ const char* Autonomous::buttonMatrixList[] = {
     ""};
 
 void autonomous() {
-    switch (Autonomous::autonID) {
+    switch (autonID) {
         case Autonomous::Routine::skills:
             // Skills Auton
             // Score ring

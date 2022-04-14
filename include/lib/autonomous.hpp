@@ -24,9 +24,6 @@ enum class Routine {
     skills
 };
 
-// Creating a Auton variable, with default value of NULL
-extern Routine autonID;
-
 }  // namespace Autonomous
 
 #endif /* autonomous.hpp */
