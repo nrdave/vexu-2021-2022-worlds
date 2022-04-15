@@ -23,7 +23,9 @@ void TankDrive::setPIDConstants(double Pconst, double Iconst, double Dconst) {
 
 void TankDrive::setDimensions(double wheelDiameter, double wheelTrackWidth) {
     wheelRadius = wheelDiameter / 2;
-    encoderRadius = wheelTrackWidth / 2;
+    trackWidth = wheelTrackWidth / 2;
+    printf("Tank Drive dimensions: Wheel Radius: %.2lf, Track width: %.2lf\n",
+           wheelRadius, trackWidth);
 }
 
 void TankDrive::addADIEncoders(char leftEncoderTopPort, bool leftEncoderRev,
@@ -149,7 +151,7 @@ void TankDrive::turnAngle(double angle) {
      * angle is the angle to turn (converted to radians), and turnLength is the
      * arc length, or the length each side of the base needs to travel
      */
-    double turnLength = angle * encoderRadius * (3.1415 / 180);
+    double turnLength = angle * trackWidth * (3.1415 / 180);
 
     /**
      * Calling the drivePID. The right side gets -turnLength as that causes the
