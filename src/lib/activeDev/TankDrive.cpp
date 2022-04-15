@@ -16,9 +16,16 @@ void TankDrive::setGearing(pros::motor_gearset_e_t gearing) {
 }
 
 void TankDrive::setPIDConstants(double Pconst, double Iconst, double Dconst) {
-    kP = Pconst;
-    kI = Iconst;
-    kD = Dconst;
+    kP_straight = Pconst;
+    kI_straight = Iconst;
+    kD_straight = Dconst;
+}
+
+void TankDrive::setPIDTurnConstants(double Pconst, double Iconst,
+                                    double Dconst) {
+    kP_turn = Pconst;
+    kI_turn = Iconst;
+    kD_turn = Dconst;
 }
 
 void TankDrive::setDimensions(double wheelDiameter, double wheelTrackWidth) {
@@ -52,7 +59,8 @@ void TankDrive::driver(pros::controller_id_e_t controller) {
         controller, pros::E_CONTROLLER_ANALOG_RIGHT_Y));
 }
 
-void TankDrive::drivePID(double leftTarg, double rightTarg) {
+void TankDrive::drivePID(double leftTarg, double rightTarg, double kP,
+                         double kI, double kD) {
     // Counts the number of cycles the robot has not moved - used for timeout
     // condition
     short int stoppedCount = 0;
@@ -139,7 +147,7 @@ void TankDrive::moveStraight(double distance) {
     /**
      * moveStraight simply calls drivePID with both sides having the same target
      */
-    drivePID(distance, distance);
+    drivePID(distance, distance, kP_straight, kI_straight, kD_straight);
 }
 
 void TankDrive::turnAngle(double angle) {
@@ -157,7 +165,7 @@ void TankDrive::turnAngle(double angle) {
      * Calling the drivePID. The right side gets -turnLength as that causes the
      * robot to turn clockwise (right) when a positive angle is entered
      */
-    drivePID(turnLength, -turnLength);
+    drivePID(turnLength, -turnLength, kP_turn, kI_turn, kD_turn);
 }
 
 // Telemetry Functions

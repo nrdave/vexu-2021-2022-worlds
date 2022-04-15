@@ -23,8 +23,12 @@ class TankDrive {
      * The constants for the drivetrain's PID controller.
      * kP is the proportional constant, kI is the integral constant, and kD is
      * the derivative constant.
+     *
+     * The straight constants are for straight movement, while the turn
+     * constants are for turning
      */
-    double kP, kI, kD;
+    double kP_straight, kI_straight, kD_straight;
+    double kP_turn, kI_turn, kD_turn;
 
     /**
      * A variable used to store the radius of the wheels on the drivetrain.
@@ -37,7 +41,7 @@ class TankDrive {
      * rotation and the location of the encoders used to track position, is used
      * in the turnAngle function.
      */
-    double encoderRadius;
+    double trackWidth;
 
     /**
      * Pointers to PROS ADI encoders that can be added to the drivetrain. By
@@ -69,8 +73,15 @@ class TankDrive {
      * @param rightTarg: The target length to move to, in inches, for the
      * right side of the drivetrain Can be negative to indicate rotating
      * backwards
+     * @param kP: the value of the proportional constant to use in the PID
+     * controller
+     * @param kI: the value of the integral constant to use  in the PID
+     * controller
+     * @param kD: the value of the derivative constant to use  in the PID
+     * controller
      */
-    void drivePID(double leftTarg, double rightTarg);
+    void drivePID(double leftTarg, double rightTarg, double kP, double kI,
+                  double kD);
 
    public:
     /**
@@ -108,7 +119,8 @@ class TankDrive {
 
     /**
      * Function: setPIDConstants
-     * This function sets the PID constants of the drivetrain.
+     * This function sets the PID constants of the drivetrain for moving
+     * straight.
      *
      * @param Pconst: the value of the proportional constant in the PID
      * controller
@@ -116,6 +128,19 @@ class TankDrive {
      * @param Dconst: the value of the derivative constant in the PID controller
      */
     void setPIDConstants(double Pconst, double Iconst, double Dconst);
+
+    /**
+     * Function: setPIDTurnConstants
+     * This function sets the PID constants of the drivetrain for turning.
+     *
+     * @param Pconst: the value of the proportional constant in the PID
+     * controller for turning
+     * @param Iconst: the value of the integral constant in the PID controller
+     * for turning
+     * @param Dconst: the value of the derivative constant in the PID controller
+     * for turning
+     */
+    void setPIDTurnConstants(double Pconst, double Iconst, double Dconst);
 
     /**
      * Function: setDimensions
