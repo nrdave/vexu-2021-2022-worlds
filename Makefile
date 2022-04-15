@@ -26,17 +26,18 @@ EXCLUDE_COLD_LIBRARIES:=
 # Set this to 1 to add additional rules to compile your project as a PROS library template
 IS_LIBRARY:=1
 # TODO: CHANGE THIS!
-LIBNAME:=thermolib-TP
+LIBNAME:=libERAUG-S-TP
 VERSION:=1.0.0
 # EXCLUDE_SRC_FROM_LIB= $(SRCDIR)/unpublishedfile.c
 # this line excludes opcontrol.c and similar files
 EXCLUDE_SRC_FROM_LIB+=$(foreach file, $(SRCDIR)/opcontrol.cpp, $(SRCDIR)/autonomous.cpp, $(SRCDIR)/initialize.cpp,$(foreach cext,$(CEXTS),$(file).$(cext)) $(foreach cxxext,$(CXXEXTS),$(file).$(cxxext)))
-EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/lib/activeDev/Claw.cpp
-EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/lib/activeDev/PneumaticClaw.cpp
-EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/lib/activeDev/gui.cpp
-EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/lib/activeDev/Lift.cpp
-EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/lib/activeDev/MotorGroup.cpp
-EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/lib/activeDev/TankDrive.cpp
+
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/autonomous.cpp
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/initialize.cpp
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/opcontrol.cpp
+
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/lib/activeDev
+
 # files that get distributed to every user (beyond your source archive) - add
 # whatever files you want here. This line is configured to add all header files
 # that are in the the include directory get exported
