@@ -78,8 +78,8 @@ void TankDrive::drivePID(double leftTarg, double rightTarg) {
     // Enter a while loop that runs until both sides are within 10 degrees
     // of target rotation
     while ((abs(leftError) > 5 || abs(rightError) > 5) && stoppedCount < 5) {
-        printf("\nLeft Targ: %f, Left Error: %f", leftTarg_Deg, leftError);
-        printf("\nRight Targ: %f, Right Error: %f", rightTarg_Deg, rightError);
+        printf("Left Targ: %f, Left Error: %f\n", leftTarg_Deg, leftError);
+        printf("Right Targ: %f, Right Error: %f\n", rightTarg_Deg, rightError);
         // Calculate the integral
         leftIntegral += leftError;
         rightIntegral += rightError;
@@ -109,7 +109,7 @@ void TankDrive::drivePID(double leftTarg, double rightTarg) {
             leftOutput = copysign(voltCap, leftOutput);
         if (abs(rightOutput) > voltCap)
             rightOutput = copysign(voltCap, rightOutput);
-        printf("\nLeft Output: %f Right Output: %f", leftOutput, rightOutput);
+        printf("Left Output: %f Right Output: %f\n", leftOutput, rightOutput);
 
         // Set the motor group voltages to the output velocity levels
         leftMotors.moveVoltage(leftOutput);
@@ -121,11 +121,12 @@ void TankDrive::drivePID(double leftTarg, double rightTarg) {
 
         // Timeout condition in case the drive gets stuck - rather not get to
         // correct position and continue than stop entirely
-        if (leftError == leftPrevError && rightError == rightPrevError)
+        if (leftError == leftPrevError && rightError == rightPrevError &&
+            voltCap >= 6000)
             stoppedCount++;
         else
             stoppedCount = 0;
-        pros::delay(20);
+        pros::delay(5);
     }
     leftMotors.moveVelocity(0);
     rightMotors.moveVelocity(0);
