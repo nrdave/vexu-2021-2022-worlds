@@ -39,16 +39,13 @@ void initialize() {
 
     // Configuring drive
     // Dimensions for encoder wheels
-    drive.setDimensions(2.75, 9.84375);
+    // drive.setDimensions(2.75, 9.84375);
     // Dimensions for drive wheels
-    // drive.setDimensions(3.25, 10);
+    drive.setDimensions(3.25, 9.875);
     drive.setGearing(pros::E_MOTOR_GEARSET_18);
-    drive.addADIEncoders('g', false, 'a', false);
-    drive.setPIDConstants(125, 0, 0);
-
-    // Configuring claw
-    // claw.setGearing(MOTOR_GEARSET_18);
-    // claw.setMaxSpeed(60);
+    // drive.addADIEncoders('g', false, 'a', false);
+    drive.setPIDConstants(75, 0.01, 0);
+    drive.setPIDTurnConstants(130, 0.22, 2);
 
     scrMain = lv_obj_create(NULL, NULL);
     scrAuton = lv_obj_create(NULL, NULL);
@@ -103,7 +100,7 @@ void updateAutonLbl() {
      * the current Autonomous label to the corresponding
      * text
      */
-    switch (Autonomous::autonID) {
+    switch (autonID) {
         case Autonomous::Routine::skills:
             lv_label_set_text(curAutonLbl, "Skills");
             break;
@@ -130,22 +127,22 @@ lv_res_t updateAutonID(lv_obj_t* btnm, const char* txt) {
      * defaults to no autonomous
      */
     if (txt == "None")
-        Autonomous::autonID = Autonomous::Routine::none;
+        autonID = Autonomous::Routine::none;
 
     else if (txt == "Test")
-        Autonomous::autonID = Autonomous::Routine::test;
+        autonID = Autonomous::Routine::test;
 
     else if (txt == "Competition - Side Goal")
-        Autonomous::autonID = Autonomous::Routine::competition_sideGoal;
+        autonID = Autonomous::Routine::competition_sideGoal;
 
     else if (txt == "Skills")
-        Autonomous::autonID = Autonomous::Routine::skills;
+        autonID = Autonomous::Routine::skills;
 
     else if (txt == "Competition - Middle Goal")
-        Autonomous::autonID = Autonomous::Routine::competition_middleGoal;
+        autonID = Autonomous::Routine::competition_middleGoal;
 
     else
-        Autonomous::autonID = Autonomous::Routine::none;
+        autonID = Autonomous::Routine::none;
 
     // Updating the label for the current selected autonomous
     updateAutonLbl();
