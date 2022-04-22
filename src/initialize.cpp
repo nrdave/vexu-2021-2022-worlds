@@ -5,7 +5,7 @@
 Lift lift({10, 20}, {false, true});
 // Claw claw({9}, {false});
 PneumaticClaw claw('e', false);
-TankDrive drive({11, 12}, {4, 7}, {false, false}, {true, true});
+TankDrive drive({11, 12}, {4, 8}, {false, false}, {true, true});
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -44,8 +44,8 @@ void initialize() {
     drive.setDimensions(3.25, 9.875);
     drive.setGearing(pros::E_MOTOR_GEARSET_18);
     // drive.addADIEncoders('g', false, 'a', false);
-    drive.setPIDConstants(75, 0.01, 0);
-    drive.setPIDTurnConstants(130, 0.22, 2);
+    drive.setPIDConstants(50, 0, 1);
+    drive.setPIDTurnConstants(90, 0, 1);
 
     scrMain = lv_obj_create(NULL, NULL);
     scrAuton = lv_obj_create(NULL, NULL);
@@ -72,6 +72,8 @@ void initialize() {
     lv_obj_align(curAutonLbl, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
 
     lv_scr_load(scrMain);
+
+    claw.close();
 }
 
 /**
