@@ -45,7 +45,7 @@
 // User Files
 #include "externs.hpp"
 #include "lib/Claw.hpp"
-#include "lib/Lift.hpp"
+#include "lib/FourBar.hpp"
 #include "lib/MotorGroup.hpp"
 #include "lib/TankDrive.hpp"
 #include "lib/autonomous.hpp"

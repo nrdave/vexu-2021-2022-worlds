@@ -2,7 +2,7 @@
 
 // lift. claw, and drive, as extern objects, must be initialized in the global
 // scope
-Lift lift({10, 20}, {false, true});
+FourBar lift({10, 20}, {false, true});
 // Claw claw({9}, {false});
 PneumaticClaw claw('e', false);
 TankDrive drive({11, 12}, {4, 8}, {false, false}, {true, true});

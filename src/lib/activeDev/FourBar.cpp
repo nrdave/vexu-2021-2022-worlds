@@ -1,6 +1,7 @@
-#include "lib/Lift.hpp"
+#include "lib/FourBar.hpp"
 
-Lift::Lift(std::initializer_list<int> ports, std::initializer_list<bool> revs)
+FourBar::FourBar(std::initializer_list<int> ports,
+                 std::initializer_list<bool> revs)
     : motors(ports, revs) {
     // Encoders output their rotation in degrees (Other options don't really
     // make sense)
@@ -8,23 +9,23 @@ Lift::Lift(std::initializer_list<int> ports, std::initializer_list<bool> revs)
 }
 
 // Configuration Functions
-void Lift::setGearing(pros::motor_gearset_e_t gearing) {
+void FourBar::setGearing(pros::motor_gearset_e_t gearing) {
     motors.setGearing(gearing);
 }
 
-void Lift::setExternalGearRatio(double ratio) { extGearRatio = ratio; }
+void FourBar::setExternalGearRatio(double ratio) { extGearRatio = ratio; }
 
-void Lift::setMaxSpeeds(int maxUpRPM, int maxDownRPM) {
+void FourBar::setMaxSpeeds(int maxUpRPM, int maxDownRPM) {
     maxUpSpd = maxUpRPM;
     maxDownSpd = maxDownRPM;
 }
 
-void Lift::setHoldThreshold(double degrees) { holdThreshold = degrees; }
+void FourBar::setHoldThreshold(double degrees) { holdThreshold = degrees; }
 
 // Movement Functions
-void Lift::driver(pros::controller_id_e_t controller,
-                  pros::controller_digital_e_t upButton,
-                  pros::controller_digital_e_t downButton) {
+void FourBar::driver(pros::controller_id_e_t controller,
+                     pros::controller_digital_e_t upButton,
+                     pros::controller_digital_e_t downButton) {
     if (pros::c::controller_get_digital(controller, upButton))
         up();
     else if (pros::c::controller_get_digital(controller, downButton))
@@ -33,19 +34,19 @@ void Lift::driver(pros::controller_id_e_t controller,
         stop();
 }
 
-void Lift::up() { motors.moveVelocity(maxUpSpd); }
+void FourBar::up() { motors.moveVelocity(maxUpSpd); }
 
-void Lift::down() { motors.moveVelocity(-maxDownSpd); }
+void FourBar::down() { motors.moveVelocity(-maxDownSpd); }
 
-void Lift::stop() {
+void FourBar::stop() {
     /** If the motors current position is less than the holdThreshold *
      * extGearRatio, set the brake mode to coast. Otherwise, have the motors
      * hold position when they stop.
      *
-     * holdThreshold * extGearRatio is used because it represents the rotation
-     * of the motors themselves to get the lift to the holdThreshold.
-     * extGearRatio represents the number of rotations done by the lift in one
-     * full rotation of the motor.
+     * holdThreshold / extGearRatio is used because it represents the rotation
+     * of the motors themselves to get the four bar lift to the holdThreshold.
+     * extGearRatio represents the number of rotations done by the four bar lift
+     * in one full rotation of the motor.
      */
     if (motors.getPosition() <= (holdThreshold / extGearRatio))
         motors.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
@@ -54,7 +55,7 @@ void Lift::stop() {
     motors.moveVelocity(0);
 };
 
-void Lift::moveTo(double degrees, int speed) {
+void FourBar::moveTo(double degrees, int speed) {
     int velocity = speed;
     if (degrees < motors.getPosition()) velocity *= -1;
     degrees /= extGearRatio;
