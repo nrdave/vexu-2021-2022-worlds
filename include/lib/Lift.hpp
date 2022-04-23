@@ -134,6 +134,14 @@ class Lift {
      * Wraps the MotorGroup calls to stop the lift
      */
     void stop();
+
+    /**
+     * Function: moveTo
+     * Moves the lift to a specific "rotation" from its zero position
+     * @param degrees The degree position to move the lift to
+     * @param speed The speed at which the motors should run at
+     */
+    void moveTo(double degrees, int speed);
 };
 
 #endif /* Lift.hpp */

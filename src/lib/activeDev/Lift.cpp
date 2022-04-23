@@ -53,3 +53,13 @@ void Lift::stop() {
         motors.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
     motors.moveVelocity(0);
 };
+
+void Lift::moveTo(double degrees, int speed) {
+    int velocity = speed;
+    if (degrees < motors.getPosition()) velocity *= -1;
+    degrees /= extGearRatio;
+    while (motors.getPosition() > degrees + 5 ||
+           motors.getPosition() < degrees - 5)
+        motors.moveVelocity(velocity);
+    stop();
+}
