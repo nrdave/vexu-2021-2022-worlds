@@ -7,8 +7,14 @@ PneumaticClaw::PneumaticClaw(char port, bool initPosition)
 
 void PneumaticClaw::driver(pros::controller_id_e_t controller,
                            pros::controller_digital_e_t button) {
+    /**
+     * The driver function requires that the button to control the claw is held
+     * down for multiple cycles. This prevents the claw from opening on a button
+     * press, then immediately closing since the button is still pressed on the
+     * next iteration of the opcontrol while loop.
+     */
     if (pros::c::controller_get_digital(controller, button)) ++pressedCount;
-    if (pressedCount >= 15) {
+    if (pressedCount >= 10) {
         if (closed)
             open();
         else
