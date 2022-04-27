@@ -19,8 +19,9 @@ extern const char* buttonMatrixList[];
 enum class Routine {
     none,
     test,
-    competition_sideGoal,
-    competition_middleGoal,
+    sideGoal_WP,
+    sideGoal_NoWP,
+    middleGoal_WP,
     skills
 };
 

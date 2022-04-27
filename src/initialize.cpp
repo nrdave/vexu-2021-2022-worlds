@@ -65,7 +65,7 @@ void initialize() {
 
     autonSelect = GUI::createButtonMatrix(
         scrAuton, Autonomous::buttonMatrixList, updateAutonID);
-    lv_obj_align(autonSelect, NULL, LV_ALIGN_IN_TOP_RIGHT, -10, 20);
+    lv_obj_align(autonSelect, NULL, LV_ALIGN_IN_TOP_RIGHT, -10, 25);
     lv_obj_set_size(autonSelect, 250, 200);
 
     curAutonLbl = GUI::createLabel(scrAuton, "Auton");
@@ -109,11 +109,14 @@ void updateAutonLbl() {
         case Autonomous::Routine::test:
             lv_label_set_text(curAutonLbl, "Test");
             break;
-        case Autonomous::Routine::competition_sideGoal:
-            lv_label_set_text(curAutonLbl, "Competition - Side Goal");
+        case Autonomous::Routine::sideGoal_WP:
+            lv_label_set_text(curAutonLbl, "Side Goal - Win Point");
             break;
-        case Autonomous::Routine::competition_middleGoal:
-            lv_label_set_text(curAutonLbl, "Competition - Middle Goal");
+        case Autonomous::Routine::sideGoal_NoWP:
+            lv_label_set_text(curAutonLbl, "Side Goal - No Win Point");
+            break;
+        case Autonomous::Routine::middleGoal_WP:
+            lv_label_set_text(curAutonLbl, "Middle Goal - Win Point");
             break;
         case Autonomous::Routine::none:
             lv_label_set_text(curAutonLbl, "No Auton Selected");
@@ -131,17 +134,20 @@ lv_res_t updateAutonID(lv_obj_t* btnm, const char* txt) {
     if (txt == "None")
         autonID = Autonomous::Routine::none;
 
-    else if (txt == "Test")
-        autonID = Autonomous::Routine::test;
-
-    else if (txt == "Competition - Side Goal")
-        autonID = Autonomous::Routine::competition_sideGoal;
-
     else if (txt == "Skills")
         autonID = Autonomous::Routine::skills;
 
-    else if (txt == "Competition - Middle Goal")
-        autonID = Autonomous::Routine::competition_middleGoal;
+    else if (txt == "Test")
+        autonID = Autonomous::Routine::test;
+
+    else if (txt == "Side Goal - WP")
+        autonID = Autonomous::Routine::sideGoal_WP;
+
+    else if (txt == "Side Goal - No WP")
+        autonID = Autonomous::Routine::sideGoal_NoWP;
+
+    else if (txt == "Middle Goal - WP")
+        autonID = Autonomous::Routine::middleGoal_WP;
 
     else
         autonID = Autonomous::Routine::none;
