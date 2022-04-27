@@ -14,7 +14,7 @@ void PneumaticClaw::driver(pros::controller_id_e_t controller,
      * next iteration of the opcontrol while loop.
      */
     if (pros::c::controller_get_digital(controller, button)) ++pressedCount;
-    if (pressedCount >= 10) {
+    if (pressedCount >= 15) {
         if (closed)
             open();
         else
