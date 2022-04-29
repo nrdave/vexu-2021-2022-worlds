@@ -62,7 +62,7 @@ void autonomous() {
 
             // let go of mobile goal
             claw.open();
-            drive.moveStraight(-8);
+            drive.moveStraight(-4);
 
             // Go for side neutral mobile goal
             drive.turnAngle(-90);
@@ -70,7 +70,7 @@ void autonomous() {
             claw.close();
 
             // Score side neutral goal
-            drive.moveStraight(-18);
+            drive.moveStraight(-24);
             drive.turnAngle(180);
             drive.moveStraight(18);
 
@@ -96,7 +96,7 @@ void autonomous() {
             // Move alliance mobile goal to middle
             drive.moveStraight(-5);
             drive.turnAngle(-85);
-            drive.moveStraight(42);
+            drive.moveStraight(45);
 
             // clear rings using alliance goal
             drive.turnAngle(105);
@@ -104,10 +104,10 @@ void autonomous() {
             // let go of mobile goal
             drive.moveStraight(27);
             claw.open();
-            drive.moveStraight(-12);
+            drive.moveStraight(-6);
 
             // Go for middle neutral mobile goal
-            drive.turnAngle(-80);
+            drive.turnAngle(-85);
             drive.moveStraight(24);
             claw.close();
 
